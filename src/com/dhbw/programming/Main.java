@@ -21,24 +21,24 @@ public class Main {
 	static int[] numbers = new int[6];
 	static int playerCount;
 	static int pips;
+	static Object lastOperation;
 
 	public static void main(String[] args) {
 
-		// TODO create correct dat
+		// TODO create correct data
 
-		ThreeOfAKind bla = new ThreeOfAKind(1);
 		Data data = new Data(new ThreeOfAKind(1), new ThreeOfAKind(2), new ThreeOfAKind(3), new ThreeOfAKind(4),
 				new ThreeOfAKind(5), new ThreeOfAKind(6), new FourOfAKind(1), new FourOfAKind(2), new FourOfAKind(3),
 				new FourOfAKind(4), new FourOfAKind(5), new FourOfAKind(6), new Kniffel(), new FullHouse(),
 				new LittleStraight(), new BigStraight());
 		Player player = new Player("Tom", 0, data);
 
-		data.setFourofakindSix(data.getFourofakindSix().getNumber(), data.getFourofakindSix().getPoints(),
-				data.getFourofakindSix().getLock());
+		// data.setFourofakindSix(data.getFourofakindSix().getNumber(),
+		// data.getFourofakindSix().getPoints(),
+		// data.getFourofakindSix().getLock());
 
-		System.out.println(player.getData());
-		Bot bot = new Bot();
-		bot.introduction();
+		// Bot bot = new Bot();
+		// bot.introduction();
 
 		MainFrame.main(null);
 
@@ -100,6 +100,13 @@ public class Main {
 		}
 	}
 
+	public static int[] rollDice(int[] dice) {
+		for (int i = 0; i < dice.length; i++) {
+			dice[i] = (int) ((Math.random() * 6) + 1);
+		}
+		return dice;
+	}
+
 	private static void getValue(int[] dice, Player player) {
 		Data data = player.getData();
 		Arrays.fill(numbers, 0);
@@ -117,6 +124,7 @@ public class Main {
 				if (numbers[i] == 5 && data.getKniffel().getLock() == false) {
 					player.setPoints(player.getPoints() + data.getKniffel().getPoints());
 					data.setKniffel(true);
+					lastOperation = data.getKniffel();
 					System.out.println("You rolled a yahtzee!");
 					// Four-of-a-kind, add all pips as points
 				} else {
@@ -226,4 +234,13 @@ public class Main {
 			}
 		}
 	}
+
+	public static int getPlayerCount() {
+		return playerCount;
+	}
+
+	public static void setPlayerCount(int playerCount) {
+		Main.playerCount = playerCount;
+	}
+
 }

@@ -13,15 +13,20 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
+import javax.swing.JTable;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.border.EmptyBorder;
-
-import com.dhbw.programming.modell.GameFrame;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+import javax.swing.table.DefaultTableModel;
 
 public class MainFrame extends JFrame {
 
 	private JPanel contentPane;
 	private final Action action = new SwingAction();
+	private int playerCount;
+	private JTable nameTable;
+	private DefaultTableModel tableModel = new DefaultTableModel();
 
 	/**
 	 * Launch the application.
@@ -44,7 +49,7 @@ public class MainFrame extends JFrame {
 	 */
 	public MainFrame() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 401, 156);
+		setBounds(100, 100, 401, 423);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -56,7 +61,7 @@ public class MainFrame extends JFrame {
 				GameFrame.main(null);
 			}
 		});
-		btnNewButton_1.setBounds(255, 96, 117, 25);
+		btnNewButton_1.setBounds(255, 357, 117, 25);
 		contentPane.add(btnNewButton_1);
 
 		JLabel lblIWantTo = new JLabel("I want to start a new game with ");
@@ -65,6 +70,23 @@ public class MainFrame extends JFrame {
 		contentPane.add(lblIWantTo);
 
 		JSpinner playerSpinner = new JSpinner();
+		playerSpinner.addChangeListener(new ChangeListener() {
+			public void stateChanged(ChangeEvent e) {
+				System.out.println(((Number) playerSpinner.getValue()).intValue());
+				Main.setPlayerCount(((Number) playerSpinner.getValue()).intValue());
+
+				System.out.println(tableModel.getRowCount());
+
+				if (Main.getPlayerCount() < tableModel.getRowCount() + 1) {
+					tableModel.removeRow(tableModel.getRowCount() - 1);
+					Main.setPlayerCount(Main.getPlayerCount() - 1);
+				} else {
+					Main.setPlayerCount(Main.getPlayerCount() + 1);
+					tableModel.addRow(new Object[] { "Player " + (Main.getPlayerCount() - 1),
+							"Player" + (Main.getPlayerCount() - 1) });
+				}
+			}
+		});
 		playerSpinner.setFont(new Font("Dialog", Font.BOLD, 14));
 		playerSpinner.setModel(new SpinnerNumberModel(2, 2, 8, 1));
 		playerSpinner.setBounds(274, 7, 38, 25);
@@ -100,8 +122,18 @@ public class MainFrame extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnAbout.setBounds(12, 96, 117, 25);
+		btnAbout.setBounds(12, 357, 117, 25);
 		contentPane.add(btnAbout);
+
+		nameTable = new JTable(tableModel);
+		nameTable.setBounds(12, 66, 360, 272);
+		contentPane.add(nameTable);
+		tableModel.addColumn("Col1");
+		tableModel.addColumn("Col2");
+		tableModel.addRow(new Object[] { "Player 1", "Player1" });
+		tableModel.addRow(new Object[] { "Player 2", "Player2" });
+		Main.setPlayerCount(2);
+		System.out.println(nameTable.getModel());
 	}
 
 	private class SwingAction extends AbstractAction {
