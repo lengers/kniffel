@@ -24,7 +24,6 @@ public class MainFrame extends JFrame {
 
 	private JPanel contentPane;
 	private final Action action = new SwingAction();
-	private int playerCount;
 	private JTable nameTable;
 	private DefaultTableModel tableModel = new DefaultTableModel();
 
@@ -49,20 +48,20 @@ public class MainFrame extends JFrame {
 	 */
 	public MainFrame() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 401, 423);
+		setBounds(100, 100, 401, 272);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
-		JButton btnNewButton_1 = new JButton("Start");
-		btnNewButton_1.addActionListener(new ActionListener() {
+		JButton startButton = new JButton("Start");
+		startButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				GameFrame.main(null);
 			}
 		});
-		btnNewButton_1.setBounds(255, 357, 117, 25);
-		contentPane.add(btnNewButton_1);
+		startButton.setBounds(255, 210, 117, 25);
+		contentPane.add(startButton);
 
 		JLabel lblIWantTo = new JLabel("I want to start a new game with ");
 		lblIWantTo.setFont(new Font("Dialog", Font.BOLD, 14));
@@ -72,10 +71,7 @@ public class MainFrame extends JFrame {
 		JSpinner playerSpinner = new JSpinner();
 		playerSpinner.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
-				System.out.println(((Number) playerSpinner.getValue()).intValue());
 				Main.setPlayerCount(((Number) playerSpinner.getValue()).intValue());
-
-				System.out.println(tableModel.getRowCount());
 
 				if (Main.getPlayerCount() < tableModel.getRowCount() + 1) {
 					tableModel.removeRow(tableModel.getRowCount() - 1);
@@ -97,10 +93,10 @@ public class MainFrame extends JFrame {
 		lblPlayers.setBounds(319, 12, 70, 15);
 		contentPane.add(lblPlayers);
 
-		JCheckBox chckbxNewCheckBox = new JCheckBox("");
-		chckbxNewCheckBox.setAction(action);
-		chckbxNewCheckBox.setBounds(35, 35, 28, 23);
-		contentPane.add(chckbxNewCheckBox);
+		JCheckBox botCheckBox = new JCheckBox("");
+		botCheckBox.setAction(action);
+		botCheckBox.setBounds(35, 35, 28, 23);
+		contentPane.add(botCheckBox);
 
 		JSpinner botSpinner = new JSpinner();
 		botSpinner.setEnabled(false);
@@ -117,16 +113,16 @@ public class MainFrame extends JFrame {
 		lblIWantTo_1.setBounds(64, 39, 128, 15);
 		contentPane.add(lblIWantTo_1);
 
-		JButton btnAbout = new JButton("About");
-		btnAbout.addActionListener(new ActionListener() {
+		JButton aboutButton = new JButton("About");
+		aboutButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnAbout.setBounds(12, 357, 117, 25);
-		contentPane.add(btnAbout);
+		aboutButton.setBounds(12, 210, 117, 25);
+		contentPane.add(aboutButton);
 
 		nameTable = new JTable(tableModel);
-		nameTable.setBounds(12, 66, 360, 272);
+		nameTable.setBounds(12, 66, 360, 132);
 		contentPane.add(nameTable);
 		tableModel.addColumn("Col1");
 		tableModel.addColumn("Col2");

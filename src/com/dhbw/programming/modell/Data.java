@@ -1,170 +1,93 @@
 package com.dhbw.programming.modell;
 
 public class Data {
-	private ThreeOfAKind ThreeofakindOne;
-	private ThreeOfAKind ThreeofakindTwo;
-	private ThreeOfAKind ThreeofakindThree;
-	private ThreeOfAKind ThreeofakindFour;
-	private ThreeOfAKind ThreeofakindFive;
-	private ThreeOfAKind ThreeofakindSix;
-
-	private FourOfAKind FourofakindOne;
-	private FourOfAKind FourofakindTwo;
-	private FourOfAKind FourofakindThree;
-	private FourOfAKind FourofakindFour;
-	private FourOfAKind FourofakindFive;
-	private FourOfAKind FourofakindSix;
+	private OfAKind ofakindOne;
+	private OfAKind ofakindTwo;
+	private OfAKind ofakindThree;
+	private OfAKind ofakindFour;
+	private OfAKind ofakindFive;
+	private OfAKind ofakindSix;
 
 	private Kniffel kniffel;
 	private FullHouse fullHouse;
 	private LittleStraight littleStraight;
 	private BigStraight bigStraight;
+	private Chance chance;
 
-	// public Data() {
-	// }
-
-	public Data(ThreeOfAKind threeofakindOne, ThreeOfAKind threeofakindTwo, ThreeOfAKind threeofakindThree,
-			ThreeOfAKind threeofakindFour, ThreeOfAKind threeofakindFive, ThreeOfAKind threeofakindSix,
-			FourOfAKind fourofakindOne, FourOfAKind fourofakindTwo, FourOfAKind fourofakindThree,
-			FourOfAKind fourofakindFour, FourOfAKind fourofakindFive, FourOfAKind fourofakindSix, Kniffel kniffel,
-			FullHouse fullHouse, LittleStraight littleStraight, BigStraight bigStraight) {
+	public Data(OfAKind threeofakindOne, OfAKind threeofakindTwo, OfAKind threeofakindThree, OfAKind threeofakindFour,
+			OfAKind threeofakindFive, OfAKind threeofakindSix, Kniffel kniffel, FullHouse fullHouse,
+			LittleStraight littleStraight, BigStraight bigStraight, Chance chance) {
 		super();
-		ThreeofakindOne = threeofakindOne;
-		ThreeofakindTwo = threeofakindTwo;
-		ThreeofakindThree = threeofakindThree;
-		ThreeofakindFour = threeofakindFour;
-		ThreeofakindFive = threeofakindFive;
-		ThreeofakindSix = threeofakindSix;
-		FourofakindOne = fourofakindOne;
-		FourofakindTwo = fourofakindTwo;
-		FourofakindThree = fourofakindThree;
-		FourofakindFour = fourofakindFour;
-		FourofakindFive = fourofakindFive;
-		FourofakindSix = fourofakindSix;
+		ofakindOne = threeofakindOne;
+		ofakindTwo = threeofakindTwo;
+		ofakindThree = threeofakindThree;
+		ofakindFour = threeofakindFour;
+		ofakindFive = threeofakindFive;
+		ofakindSix = threeofakindSix;
 		this.kniffel = kniffel;
 		this.fullHouse = fullHouse;
 		this.littleStraight = littleStraight;
 		this.bigStraight = bigStraight;
 	}
 
-	public ThreeOfAKind getThreeofakindOne() {
-		return (ThreeofakindOne);
+	public OfAKind getOfakindOne() {
+		return (ofakindOne);
 	}
 
-	public void setThreeofakindOne(int number, int points, Boolean lock) {
-		ThreeofakindOne.setNumber(number);
-		ThreeofakindOne.setPoints(points);
-		ThreeofakindOne.setLock(lock);
+	public void setOfakindOne(int number, int points, Boolean lock) {
+		ofakindOne.setNumber(number);
+		ofakindOne.setPoints(points);
+		ofakindOne.setLock(lock);
 	}
 
-	public ThreeOfAKind getThreeofakindTwo() {
-		return ThreeofakindTwo;
+	public OfAKind getOfakindTwo() {
+		return ofakindTwo;
 	}
 
-	public void setThreeofakindTwo(int number, int points, Boolean lock) {
-		ThreeofakindTwo.setNumber(number);
-		ThreeofakindTwo.setPoints(points);
-		ThreeofakindTwo.setLock(lock);
+	public void setOfakindTwo(int number, int points, Boolean lock) {
+		ofakindTwo.setNumber(number);
+		ofakindTwo.setPoints(points);
+		ofakindTwo.setLock(lock);
 	}
 
-	public ThreeOfAKind getThreeofakindThree() {
-		return ThreeofakindThree;
+	public OfAKind getOfakindThree() {
+		return ofakindThree;
 	}
 
-	public void setThreeofakindThree(int number, int points, Boolean lock) {
-		ThreeofakindThree.setNumber(number);
-		ThreeofakindThree.setPoints(points);
-		ThreeofakindThree.setLock(lock);
+	public void setOfakindThree(int number, int points, Boolean lock) {
+		ofakindThree.setNumber(number);
+		ofakindThree.setPoints(points);
+		ofakindThree.setLock(lock);
 	}
 
-	public ThreeOfAKind getThreeofakindFour() {
-		return ThreeofakindFour;
+	public OfAKind getOfakindFour() {
+		return ofakindFour;
 	}
 
-	public void setThreeofakindFour(int number, int points, Boolean lock) {
-		ThreeofakindFour.setNumber(number);
-		ThreeofakindFour.setPoints(points);
-		ThreeofakindFour.setLock(lock);
+	public void setOfakindFour(int number, int points, Boolean lock) {
+		ofakindFour.setNumber(number);
+		ofakindFour.setPoints(points);
+		ofakindFour.setLock(lock);
 	}
 
-	public ThreeOfAKind getThreeofakindFive() {
-		return ThreeofakindFive;
+	public OfAKind getOfakindFive() {
+		return ofakindFive;
 	}
 
-	public void setThreeofakindFive(int number, int points, Boolean lock) {
-		ThreeofakindFive.setNumber(number);
-		ThreeofakindFive.setPoints(points);
-		ThreeofakindFive.setLock(lock);
+	public void setOfakindFive(int number, int points, Boolean lock) {
+		ofakindFive.setNumber(number);
+		ofakindFive.setPoints(points);
+		ofakindFive.setLock(lock);
 	}
 
-	public ThreeOfAKind getThreeofakindSix() {
-		return ThreeofakindSix;
+	public OfAKind getOfakindSix() {
+		return ofakindSix;
 	}
 
-	public void setThreeofakindSix(int number, int points, Boolean lock) {
-		ThreeofakindSix.setNumber(number);
-		ThreeofakindSix.setPoints(points);
-		ThreeofakindSix.setLock(lock);
-	}
-
-	public FourOfAKind getFourofakindOne() {
-		return FourofakindOne;
-	}
-
-	public void setFourofakindOne(int number, int points, Boolean lock) {
-		FourofakindOne.setNumber(number);
-		FourofakindOne.setPoints(points);
-		FourofakindOne.setLock(lock);
-	}
-
-	public FourOfAKind getFourofakindTwo() {
-		return FourofakindTwo;
-	}
-
-	public void setFourofakindTwo(int number, int points, Boolean lock) {
-		FourofakindTwo.setNumber(number);
-		FourofakindTwo.setPoints(points);
-		FourofakindTwo.setLock(lock);
-	}
-
-	public FourOfAKind getFourofakindThree() {
-		return FourofakindThree;
-	}
-
-	public void setFourofakindThree(int number, int points, Boolean lock) {
-		FourofakindThree.setNumber(number);
-		FourofakindThree.setPoints(points);
-		FourofakindThree.setLock(lock);
-	}
-
-	public FourOfAKind getFourofakindFour() {
-		return FourofakindFour;
-	}
-
-	public void setFourofakindFour(int number, int points, Boolean lock) {
-		FourofakindFour.setNumber(number);
-		FourofakindFour.setPoints(points);
-		FourofakindFour.setLock(lock);
-	}
-
-	public FourOfAKind getFourofakindFive() {
-		return FourofakindFive;
-	}
-
-	public void setFourofakindFive(int number, int points, Boolean lock) {
-		FourofakindFive.setNumber(number);
-		FourofakindFive.setPoints(points);
-		FourofakindFive.setLock(lock);
-	}
-
-	public FourOfAKind getFourofakindSix() {
-		return FourofakindSix;
-	}
-
-	public void setFourofakindSix(int number, int points, Boolean lock) {
-		FourofakindSix.setNumber(number);
-		FourofakindSix.setPoints(points);
-		FourofakindSix.setLock(lock);
+	public void setOfakindSix(int number, int points, Boolean lock) {
+		ofakindSix.setNumber(number);
+		ofakindSix.setPoints(points);
+		ofakindSix.setLock(lock);
 	}
 
 	public Kniffel getKniffel() {
@@ -197,6 +120,14 @@ public class Data {
 
 	public void setBigStraight(Boolean lock) {
 		bigStraight.setLock(lock);
+	}
+
+	public Chance getChance() {
+		return chance;
+	}
+
+	public void setChance(Chance chance) {
+		this.chance = chance;
 	}
 
 }

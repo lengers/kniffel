@@ -12,6 +12,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
 
 public class GameFrame extends JFrame {
 	JButton diceOneButton, diceTwoButton, diceThreeButton, diceFourButton, diceFiveButton;
@@ -20,6 +21,7 @@ public class GameFrame extends JFrame {
 	private JTable table;
 	public int[] dice = new int[5];
 	public Vector<Integer> toRoll = new Vector<Integer>();
+	private DefaultTableModel gameTableModel = new DefaultTableModel();
 
 	private void rollDice() {
 		if (diceOneButton.isEnabled() == true) {
@@ -86,9 +88,14 @@ public class GameFrame extends JFrame {
 		undoButton.setBounds(569, 535, 155, 25);
 		contentPane.add(undoButton);
 
-		table = new JTable();
+		table = new JTable(gameTableModel);
 		table.setBounds(12, 12, 545, 560);
 		contentPane.add(table);
+		gameTableModel.addColumn("Info");
+		for (int i = 0; i < Main.getPlayerCount(); i++) {
+			gameTableModel.addColumn("Player" + i);
+		}
+		gameTableModel.addRow(new Object[] { "Info" });
 
 		JPanel panel = new JPanel();
 		panel.setBounds(569, 12, 155, 388);
