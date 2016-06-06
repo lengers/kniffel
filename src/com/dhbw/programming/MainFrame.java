@@ -75,9 +75,9 @@ public class MainFrame extends JFrame {
 
 				if (Main.getPlayerCount() < tableModel.getRowCount() + 1) {
 					tableModel.removeRow(tableModel.getRowCount() - 1);
-					Main.setPlayerCount(Main.getPlayerCount() - 1);
+					// Main.setPlayerCount(Main.getPlayerCount() - 1);
 				} else {
-					Main.setPlayerCount(Main.getPlayerCount() + 1);
+					// Main.setPlayerCount(Main.getPlayerCount() + 1);
 					tableModel.addRow(new Object[] { "Player " + (Main.getPlayerCount() - 1),
 							"Player" + (Main.getPlayerCount() - 1) });
 				}

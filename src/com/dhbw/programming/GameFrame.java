@@ -21,7 +21,14 @@ public class GameFrame extends JFrame {
 	private JTable table;
 	public int[] dice = new int[5];
 	public Vector<Integer> toRoll = new Vector<Integer>();
-	private DefaultTableModel gameTableModel = new DefaultTableModel();
+	private DefaultTableModel gameTableModel = new DefaultTableModel() {
+
+		@Override
+		public boolean isCellEditable(int row, int column) {
+			// all cells false
+			return false;
+		}
+	};
 
 	private void rollDice() {
 		if (diceOneButton.isEnabled() == true) {
@@ -89,13 +96,21 @@ public class GameFrame extends JFrame {
 		contentPane.add(undoButton);
 
 		table = new JTable(gameTableModel);
-		table.setBounds(12, 12, 545, 560);
+		table.setBounds(12, 54, 545, 518);
 		contentPane.add(table);
 		gameTableModel.addColumn("Info");
+		System.out.println(Main.getPlayerCount());
 		for (int i = 0; i < Main.getPlayerCount(); i++) {
+			System.out.println("Creating player " + i);
 			gameTableModel.addColumn("Player" + i);
 		}
 		gameTableModel.addRow(new Object[] { "Info" });
+		table.getColumn("Info");
+		table.setCellSelectionEnabled(true);
+		// table.isCellSelected(1, 1) {
+		// setForeground(Color.blue);
+		// };
+		// table.editCellAt(1, 1, setForeground(Color.black));
 
 		JPanel panel = new JPanel();
 		panel.setBounds(569, 12, 155, 388);
