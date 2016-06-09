@@ -3,7 +3,6 @@ package com.dhbw.programming;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
-import java.util.stream.IntStream;
 
 import com.dhbw.programming.modell.BigStraight;
 import com.dhbw.programming.modell.Chance;
@@ -18,8 +17,8 @@ public class Main {
 
 	private static Scanner user_input;
 	private static int[] rollable;
-	private static int[] dice;
-	static int[] numbers = new int[6];
+	public static int[] dice;
+	public static int[] numbers = new int[6];
 	static int playerCount;
 	static int pips;
 	static Object lastOperation;
@@ -52,8 +51,8 @@ public class Main {
 			dice[i] = (int) ((Math.random() * 6) + 1);
 		}
 
-		pips = IntStream.of(dice).sum();
-		System.out.println("You scored " + pips + " points.");
+		// System.out.println("You scored " + pips + " points.");
+
 	}
 
 	public static int[] rollDice(int[] dice) {

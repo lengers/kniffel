@@ -15,11 +15,13 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
 public class GameFrame extends JFrame {
-	JButton diceOneButton, diceTwoButton, diceThreeButton, diceFourButton, diceFiveButton;
+	public JButton diceOneButton, diceTwoButton, diceThreeButton, diceFourButton, diceFiveButton;
 
 	private JPanel contentPane;
 	private JTable table;
-	public int[] dice = new int[5];
+	private Dice diceModell = new Dice();
+	private int[] numbers = Main.numbers;
+	private int pips = Main.pips;
 	public Vector<Integer> toRoll = new Vector<Integer>();
 	private DefaultTableModel gameTableModel = new DefaultTableModel() {
 
@@ -31,21 +33,10 @@ public class GameFrame extends JFrame {
 	};
 
 	private void rollDice() {
-		if (diceOneButton.isEnabled() == true) {
-			dice[0] = (int) ((Math.random() * 6) + 1);
-		}
-		if (diceTwoButton.isEnabled() == true) {
-			dice[1] = (int) ((Math.random() * 6) + 1);
-		}
-		if (diceThreeButton.isEnabled() == true) {
-			dice[2] = (int) ((Math.random() * 6) + 1);
-		}
-		if (diceFourButton.isEnabled() == true) {
-			dice[3] = (int) ((Math.random() * 6) + 1);
-		}
-		if (diceFiveButton.isEnabled() == true) {
-			dice[4] = (int) ((Math.random() * 6) + 1);
-		}
+		diceModell.rollDice(diceOneButton.isEnabled(), diceTwoButton.isEnabled(), diceThreeButton.isEnabled(),
+				diceFourButton.isEnabled(), diceFiveButton.isEnabled());
+
+		int[] dice = diceModell.getDice();
 
 		diceOneButton.setText(String.valueOf(dice[0]));
 		diceTwoButton.setText(String.valueOf(dice[1]));
