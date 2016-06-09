@@ -105,7 +105,7 @@ public class MainFrame extends JFrame {
 					// Main.setPlayerCount(Main.getPlayerCount() - 1);
 				} else {
 					// Main.setPlayerCount(Main.getPlayerCount() + 1);
-					tableModel.addRow(new Object[] { "Player " + (playerCount - 1), "Player" + (playerCount - 1) });
+					tableModel.addRow(new Object[] { "Player " + (playerCount), "Player" + (playerCount) });
 				}
 			}
 		});
