@@ -25,7 +25,13 @@ public class MainFrame extends JFrame {
 	private JPanel contentPane;
 	private final Action action = new SwingAction();
 	private JTable nameTable;
-	private DefaultTableModel tableModel = new DefaultTableModel();
+	private DefaultTableModel tableModel = new DefaultTableModel() {
+		@Override
+		public boolean isCellEditable(int row, int column) {
+			// all cells false
+			return column != 0;
+		}
+	};
 
 	/**
 	 * Launch the application.

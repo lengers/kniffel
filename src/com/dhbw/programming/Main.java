@@ -1,5 +1,6 @@
 package com.dhbw.programming;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 import java.util.stream.IntStream;
@@ -22,12 +23,21 @@ public class Main {
 	static int playerCount;
 	static int pips;
 	static Object lastOperation;
+	static ArrayList<Player> playerList;
 
 	public static void main(String[] args) {
 
 		Data data = new Data(new OfAKind(1), new OfAKind(2), new OfAKind(3), new OfAKind(4), new OfAKind(5),
 				new OfAKind(6), new Kniffel(), new FullHouse(), new LittleStraight(), new BigStraight(), new Chance());
-		Player player = new Player("Tom", 0, 0, 0, 0, data);
+
+		for (int i = 0; i < playerCount; i++) {
+			playerList.add(new Player("Player" + i, 0, 0, 0, 0, data));
+		}
+		for (int i = 0; i < 13; i++) {
+
+		}
+
+		// Player player = new Player("Tom", 0, 0, 0, 0, data);
 
 		// Bot bot = new Bot();
 		// bot.introduction();
