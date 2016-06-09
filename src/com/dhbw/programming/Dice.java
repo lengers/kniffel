@@ -84,64 +84,46 @@ public class Dice {
 					// data.setKniffel(true);
 					// lastOperation = data.getKniffel();
 					// Four-of-a-kind, add all pips as points
-				} else {
-					data.getOfakindFive().setShow(true);
-					data.getOfakindTwo().setShow(true);
-					data.getOfakindThree().setShow(true);
-					data.getOfakindFour().setShow(true);
-					data.getOfakindFive().setShow(true);
-					System.out.println();
-					switch (i) {
-					case 1:
-						if (data.getOfakindOne().getLock() == false) {
-							data.getOfakindOne().setShow(true);
-						}
-						break;
-					case 2:
-						if (data.getOfakindTwo().getLock() == false) {
-							data.getOfakindTwo().setShow(true);
-						}
-						// break;
-						// case 3:
-						// if (data.getFourofakindThree().getLock() == false) {
-						// player.setTotalpoints(player.getTotalpoints() +
-						// pips);
-						// data.setFourofakindThree(2, pips, true);
-						// System.out.println("You rolled a four-of-a-kind!");
-						// }
-						// break;
-						// case 4:
-						// if (data.getFourofakindFour().getLock() == false) {
-						// player.setTotalpoints(player.getTotalpoints() +
-						// pips);
-						// data.setFourofakindFour(2, pips, true);
-						// System.out.println("You rolled a four-of-a-kind!");
-						// }
-						// break;
-						// case 5:
-						// if (data.getFourofakindFive().getLock() == false) {
-						// player.setTotalpoints(player.getTotalpoints() +
-						// pips);
-						// data.setFourofakindFive(2, pips, true);
-						// System.out.println("You rolled a four-of-a-kind!");
-						// }
-						// break;
-						// case 6:
-						// if (data.getFourofakindSix().getLock() == false) {
-						// player.setTotalpoints(player.getTotalpoints() +
-						// pips);
-						// data.setFourofakindSix(2, pips, true);
-						// System.out.println("You rolled a four-of-a-kind!");
-						// }
-						// break;
-					}
-
 				}
-				// if (player[1][i] == 0) {
-				// player[0][i] = IntStream.of(dice).sum();
-				// player[1][i] = 1;
-				// System.out.println("You rolled a four-of-a-kind!");
-				// }
+				switch (i) {
+				case 1:
+					if (data.getOfakindOne().getLock() == false) {
+						data.getOfakindOne().setPoints(numbers[i] * i);
+						data.getOfakindOne().setShow(true);
+					}
+					break;
+				case 2:
+					if (data.getOfakindTwo().getLock() == false) {
+						data.getOfakindTwo().setPoints(numbers[i] * i);
+						data.getOfakindTwo().setShow(true);
+					}
+					break;
+				case 3:
+					if (data.getOfakindThree().getLock() == false) {
+						data.getOfakindThree().setPoints(numbers[i] * i);
+						data.getOfakindThree().setShow(true);
+					}
+					break;
+				case 4:
+					if (data.getOfakindFour().getLock() == false) {
+						data.getOfakindThree().setPoints(numbers[i] * i);
+						data.getOfakindThree().setShow(true);
+					}
+					break;
+				case 5:
+					if (data.getOfakindFive().getLock() == false) {
+						data.getOfakindFive().setPoints(numbers[i] * i);
+						data.getOfakindFive().setShow(true);
+					}
+					break;
+				case 6:
+					if (data.getOfakindSix().getLock() == false) {
+						data.getOfakindSix().setPoints(numbers[i] * i);
+						data.getOfakindSix().setShow(true);
+					}
+					break;
+				}
+
 			} else if (numbers[i] == 3) {
 				if (pips < 2) {
 

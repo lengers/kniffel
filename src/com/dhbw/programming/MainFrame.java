@@ -36,7 +36,7 @@ public class MainFrame extends JFrame {
 	private final Action action = new SwingAction();
 	private JTable nameTable;
 	private int playerCount;
-	private ArrayList<Player> playerList;
+	private ArrayList<Player> playerList = new ArrayList<Player>();
 	private Data data = new Data(new OfAKind(1), new OfAKind(2), new OfAKind(3), new OfAKind(4), new OfAKind(5),
 			new OfAKind(6), new Kniffel(), new FullHouse(), new LittleStraight(), new BigStraight(), new Chance());
 	private DefaultTableModel tableModel = new DefaultTableModel() {
@@ -77,8 +77,12 @@ public class MainFrame extends JFrame {
 		JButton startButton = new JButton("Start");
 		startButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				System.out.println(playerCount);
 				for (int i = 0; i < playerCount; i++) {
-					playerList.add(new Player("Player" + i, 0, 0, 0, 0, data));
+					System.out.println("Creating player " + i);
+					Player player = new Player("Player" + i, 0, 0, 0, 0, data);
+					playerList.add(player); // new Player((String) "Player" + i,
+											// 0, 0, 0, 0, data));
 				}
 				GameFrame.main(playerList, playerCount);
 			}

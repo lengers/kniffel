@@ -2,16 +2,12 @@ package com.dhbw.programming;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Scanner;
 
 import com.dhbw.programming.modell.Data;
 import com.dhbw.programming.modell.Player;
 
 public class Main {
 
-	private static Scanner user_input;
-	private static int[] rollable;
-	public static int[] dice;
 	public static int[] numbers = new int[6];
 	static int playerCount;
 	static int pips;
