@@ -4,13 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
-import com.dhbw.programming.modell.BigStraight;
-import com.dhbw.programming.modell.Chance;
 import com.dhbw.programming.modell.Data;
-import com.dhbw.programming.modell.FullHouse;
-import com.dhbw.programming.modell.Kniffel;
-import com.dhbw.programming.modell.LittleStraight;
-import com.dhbw.programming.modell.OfAKind;
 import com.dhbw.programming.modell.Player;
 
 public class Main {
@@ -26,40 +20,8 @@ public class Main {
 
 	public static void main(String[] args) {
 
-		Data data = new Data(new OfAKind(1), new OfAKind(2), new OfAKind(3), new OfAKind(4), new OfAKind(5),
-				new OfAKind(6), new Kniffel(), new FullHouse(), new LittleStraight(), new BigStraight(), new Chance());
-
-		for (int i = 0; i < playerCount; i++) {
-			playerList.add(new Player("Player" + i, 0, 0, 0, 0, data));
-		}
-		for (int i = 0; i < 13; i++) {
-
-		}
-
-		// Player player = new Player("Tom", 0, 0, 0, 0, data);
-
-		// Bot bot = new Bot();
-		// bot.introduction();
-
 		MainFrame.main(null);
 
-		dice = new int[5];
-		user_input = new Scanner(System.in);
-
-		System.out.println("After the first shake, this are your dice:");
-		for (int i = 0; i < dice.length; i++) {
-			dice[i] = (int) ((Math.random() * 6) + 1);
-		}
-
-		// System.out.println("You scored " + pips + " points.");
-
-	}
-
-	public static int[] rollDice(int[] dice) {
-		for (int i = 0; i < dice.length; i++) {
-			dice[i] = (int) ((Math.random() * 6) + 1);
-		}
-		return dice;
 	}
 
 	private static void getValue(int[] dice, Player player) {
@@ -185,22 +147,6 @@ public class Main {
 				player.setTotalpoints(player.getTotalpoints() + data.getBigStraight().getPoints());
 			}
 		}
-	}
-
-	public static int getPlayerCount() {
-		return playerCount;
-	}
-
-	public static void setPlayerCount(int playerCount) {
-		Main.playerCount = playerCount;
-	}
-
-	public static int getPips() {
-		return pips;
-	}
-
-	public static void setPips(int pips) {
-		Main.pips = pips;
 	}
 
 }

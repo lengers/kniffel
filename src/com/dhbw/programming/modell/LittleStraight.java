@@ -3,6 +3,7 @@ package com.dhbw.programming.modell;
 public class LittleStraight {
 	private int points;
 	private Boolean lock;
+	private Boolean show = false;
 
 	public LittleStraight() {
 		this.points = 30;
@@ -23,6 +24,14 @@ public class LittleStraight {
 
 	public void setLock(Boolean lock) {
 		this.lock = lock;
+	}
+
+	public Boolean getShow() {
+		return show;
+	}
+
+	public void setShow(Boolean show) {
+		this.show = show;
 	}
 
 }

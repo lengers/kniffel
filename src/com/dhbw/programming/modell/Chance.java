@@ -3,6 +3,7 @@ package com.dhbw.programming.modell;
 public class Chance {
 	private int points;
 	private Boolean lock;
+	private Boolean show = false;
 
 	public Chance() {
 		this.points = 0;
@@ -23,6 +24,14 @@ public class Chance {
 
 	public void setLock(Boolean lock) {
 		this.lock = lock;
+	}
+
+	public Boolean getShow() {
+		return show;
+	}
+
+	public void setShow(Boolean show) {
+		this.show = show;
 	}
 
 }

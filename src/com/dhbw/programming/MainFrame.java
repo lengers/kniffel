@@ -4,6 +4,7 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
@@ -20,11 +21,24 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.table.DefaultTableModel;
 
+import com.dhbw.programming.modell.BigStraight;
+import com.dhbw.programming.modell.Chance;
+import com.dhbw.programming.modell.Data;
+import com.dhbw.programming.modell.FullHouse;
+import com.dhbw.programming.modell.Kniffel;
+import com.dhbw.programming.modell.LittleStraight;
+import com.dhbw.programming.modell.OfAKind;
+import com.dhbw.programming.modell.Player;
+
 public class MainFrame extends JFrame {
 
 	private JPanel contentPane;
 	private final Action action = new SwingAction();
 	private JTable nameTable;
+	private int playerCount;
+	private ArrayList<Player> playerList;
+	private Data data = new Data(new OfAKind(1), new OfAKind(2), new OfAKind(3), new OfAKind(4), new OfAKind(5),
+			new OfAKind(6), new Kniffel(), new FullHouse(), new LittleStraight(), new BigStraight(), new Chance());
 	private DefaultTableModel tableModel = new DefaultTableModel() {
 		@Override
 		public boolean isCellEditable(int row, int column) {
@@ -63,7 +77,10 @@ public class MainFrame extends JFrame {
 		JButton startButton = new JButton("Start");
 		startButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				GameFrame.main(null);
+				for (int i = 0; i < playerCount; i++) {
+					playerList.add(new Player("Player" + i, 0, 0, 0, 0, data));
+				}
+				GameFrame.main(playerList, playerCount);
 			}
 		});
 		startButton.setBounds(255, 210, 117, 25);
@@ -77,15 +94,14 @@ public class MainFrame extends JFrame {
 		JSpinner playerSpinner = new JSpinner();
 		playerSpinner.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
-				Main.setPlayerCount(((Number) playerSpinner.getValue()).intValue());
+				playerCount = (((Number) playerSpinner.getValue()).intValue());
 
-				if (Main.getPlayerCount() < tableModel.getRowCount() + 1) {
+				if (playerCount < tableModel.getRowCount() + 1) {
 					tableModel.removeRow(tableModel.getRowCount() - 1);
 					// Main.setPlayerCount(Main.getPlayerCount() - 1);
 				} else {
 					// Main.setPlayerCount(Main.getPlayerCount() + 1);
-					tableModel.addRow(new Object[] { "Player " + (Main.getPlayerCount() - 1),
-							"Player" + (Main.getPlayerCount() - 1) });
+					tableModel.addRow(new Object[] { "Player " + (playerCount - 1), "Player" + (playerCount - 1) });
 				}
 			}
 		});
@@ -134,7 +150,7 @@ public class MainFrame extends JFrame {
 		tableModel.addColumn("Col2");
 		tableModel.addRow(new Object[] { "Player 1", "Player1" });
 		tableModel.addRow(new Object[] { "Player 2", "Player2" });
-		Main.setPlayerCount(2);
+		playerCount = 2;
 		System.out.println(nameTable.getModel());
 	}
 

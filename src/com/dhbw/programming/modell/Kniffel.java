@@ -3,6 +3,7 @@ package com.dhbw.programming.modell;
 public class Kniffel {
 	private int points;
 	private Boolean lock;
+	private Boolean show = false;
 
 	public Kniffel() {
 		this.points = 50;
@@ -23,6 +24,14 @@ public class Kniffel {
 
 	public void setPoints(int points) {
 		this.points = points;
+	}
+
+	public Boolean getShow() {
+		return show;
+	}
+
+	public void setShow(Boolean show) {
+		this.show = show;
 	}
 
 }

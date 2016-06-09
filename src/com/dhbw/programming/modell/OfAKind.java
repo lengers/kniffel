@@ -4,6 +4,7 @@ public class OfAKind {
 	private int number;
 	private int points;
 	private Boolean lock;
+	private Boolean show = false;
 
 	public OfAKind(int number) {
 		this.number = number;
@@ -32,6 +33,14 @@ public class OfAKind {
 
 	public void setLock(Boolean lock) {
 		this.lock = lock;
+	}
+
+	public Boolean getShow() {
+		return show;
+	}
+
+	public void setShow(Boolean show) {
+		this.show = show;
 	}
 
 }

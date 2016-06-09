@@ -3,6 +3,7 @@ package com.dhbw.programming.modell;
 public class BigStraight {
 	private int points;
 	private Boolean lock;
+	private Boolean show = false;
 
 	public BigStraight() {
 		this.points = 40;
@@ -23,6 +24,14 @@ public class BigStraight {
 
 	public void setLock(Boolean lock) {
 		this.lock = lock;
+	}
+
+	public Boolean getShow() {
+		return show;
+	}
+
+	public void setShow(Boolean show) {
+		this.show = show;
 	}
 
 }

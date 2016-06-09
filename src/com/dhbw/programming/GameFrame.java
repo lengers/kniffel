@@ -5,7 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.Vector;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -14,15 +14,17 @@ import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
+import com.dhbw.programming.modell.Player;
+
 public class GameFrame extends JFrame {
 	public JButton diceOneButton, diceTwoButton, diceThreeButton, diceFourButton, diceFiveButton;
 
 	private JPanel contentPane;
 	private JTable table;
 	private Dice diceModell = new Dice();
-	private int[] numbers = Main.numbers;
-	private int pips = Main.pips;
-	public Vector<Integer> toRoll = new Vector<Integer>();
+	private ArrayList<Player> playerList;
+	private int playerCount;
+
 	private DefaultTableModel gameTableModel = new DefaultTableModel() {
 
 		@Override
@@ -49,11 +51,11 @@ public class GameFrame extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	public static void main(ArrayList<Player> playerList, int playerCount) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					GameFrame frame = new GameFrame();
+					GameFrame frame = new GameFrame(playerList, playerCount);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -65,7 +67,10 @@ public class GameFrame extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public GameFrame() {
+	public GameFrame(ArrayList<Player> playerList, int playerCount) {
+		this.playerList = playerList;
+		this.playerCount = playerCount;
+
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 753, 613);
 		contentPane = new JPanel();
@@ -90,8 +95,8 @@ public class GameFrame extends JFrame {
 		table.setBounds(12, 54, 545, 518);
 		contentPane.add(table);
 		gameTableModel.addColumn("Info");
-		System.out.println(Main.getPlayerCount());
-		for (int i = 0; i < Main.getPlayerCount(); i++) {
+		System.out.println(playerCount);
+		for (int i = 0; i < playerCount; i++) {
 			System.out.println("Creating player " + i);
 			gameTableModel.addColumn("Player" + i);
 		}
