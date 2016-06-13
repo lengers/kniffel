@@ -31,6 +31,8 @@ import com.dhbw.programming.modell.OfAKind;
 import com.dhbw.programming.modell.Player;
 
 public class MainFrame extends JFrame {
+	
+	// test für pushen
 
 	private JPanel contentPane;
 	private final Action action = new SwingAction();
