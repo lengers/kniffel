@@ -7,6 +7,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -25,6 +26,12 @@ public class GameFrame extends JFrame {
 	private ArrayList<Player> playerList;
 	private int playerCount;
 
+	// private
+	private ImageIcon[] icons = { new ImageIcon(Main.class.getResource("Dice1.png")),
+			new ImageIcon(Main.class.getResource("Dice2.png")), new ImageIcon(Main.class.getResource("Dice3.png")),
+			new ImageIcon(Main.class.getResource("Dice4.png")), new ImageIcon(Main.class.getResource("Dice5.png")),
+			new ImageIcon(Main.class.getResource("Dice6.png")) };
+
 	private DefaultTableModel gameTableModel = new DefaultTableModel() {
 
 		@Override
@@ -40,11 +47,20 @@ public class GameFrame extends JFrame {
 
 		int[] dice = diceModell.getDice();
 
-		diceOneButton.setText(String.valueOf(dice[0]));
-		diceTwoButton.setText(String.valueOf(dice[1]));
-		diceThreeButton.setText(String.valueOf(dice[2]));
-		diceFourButton.setText(String.valueOf(dice[3]));
-		diceFiveButton.setText(String.valueOf(dice[4]));
+		JButton[] buttons = { diceOneButton, diceTwoButton, diceThreeButton, diceFourButton, diceFiveButton };
+
+		for (int i = 0; i < buttons.length; i++) {
+			System.out.println(dice[i]);
+			System.out.println(icons[dice[i] - 1]);
+			ImageIcon icon = icons[dice[i] - 1];
+			buttons[i].setIcon(icon);
+		}
+
+		// diceOneButton.setText(String.valueOf(dice[0]));
+		// diceTwoButton.setText(String.valueOf(dice[1]));
+		// diceThreeButton.setText(String.valueOf(dice[2]));
+		// diceFourButton.setText(String.valueOf(dice[3]));
+		// diceFiveButton.setText(String.valueOf(dice[4]));
 
 	}
 

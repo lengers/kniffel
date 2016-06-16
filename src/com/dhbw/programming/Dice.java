@@ -8,8 +8,8 @@ import com.dhbw.programming.modell.Player;
 
 public class Dice {
 
-	private int[] dice;
-	private int[] numbers;
+	private int[] dice = new int[5];
+	private int[] numbers = new int[6];
 	private int pips;
 
 	public Dice() {
@@ -42,7 +42,7 @@ public class Dice {
 	private int[] fillNumbersArray(int[] dice) {
 		Arrays.fill(numbers, 0);
 		for (int i = 0; i < dice.length; i++) {
-			numbers[i - 1] += 1;
+			numbers[dice[i] - 1] += 1;
 		}
 		return numbers;
 

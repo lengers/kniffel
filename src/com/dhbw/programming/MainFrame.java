@@ -12,6 +12,7 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import javax.swing.JTable;
@@ -31,8 +32,8 @@ import com.dhbw.programming.modell.OfAKind;
 import com.dhbw.programming.modell.Player;
 
 public class MainFrame extends JFrame {
-	
-	// test für pushen
+
+	// test fï¿½r pushen
 
 	private JPanel contentPane;
 	private final Action action = new SwingAction();
@@ -144,6 +145,8 @@ public class MainFrame extends JFrame {
 		JButton aboutButton = new JButton("About");
 		aboutButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				String about = "<HTML><BODY BGCOLOR=#FFCCCC>this</BODY></HTML>";
+				JOptionPane.showMessageDialog(contentPane, about, "About", JOptionPane.PLAIN_MESSAGE, null);
 			}
 		});
 		aboutButton.setBounds(12, 210, 117, 25);
