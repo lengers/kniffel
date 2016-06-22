@@ -1,0 +1,11 @@
+<h1>The rules</h1>
+
+
+
+<h1>How to play</h1><br>
+The table column of the active player is highlighted. The active player clicks on the <b>Roll the dice</b> button to roll all 5 dice. For the following optional throws, each dice can be de- and reactived by clicking on it. A deactivated dice won't be thrown and keeps its current value. <br><br>
+After each throw, the points that could be entered into the table will be displayed and highlighted. To save those points, the player clicks on corresponding table cell. <br> To finish his move, the player clicks on the <b>Done</b> button, and the next player will be highlighted. <br><br>
+
+
+
+

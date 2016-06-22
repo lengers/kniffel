@@ -11,7 +11,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollBar;
 import javax.swing.JTable;
+import javax.swing.JTextPane;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
@@ -103,12 +105,12 @@ public class GameFrame extends JFrame {
 		diceButton.setBounds(569, 412, 155, 58);
 		contentPane.add(diceButton);
 
-		JButton undoButton = new JButton("Undo");
-		undoButton.setBounds(569, 535, 155, 25);
-		contentPane.add(undoButton);
+		JButton doneButton = new JButton("Done");
+		doneButton.setBounds(569, 482, 155, 45);
+		contentPane.add(doneButton);
 
 		table = new JTable(gameTableModel);
-		table.setBounds(12, 54, 545, 518);
+		table.setBounds(12, 83, 545, 518);
 		contentPane.add(table);
 		gameTableModel.addColumn("Info");
 		System.out.println(playerCount);
@@ -129,29 +131,37 @@ public class GameFrame extends JFrame {
 		contentPane.add(panel);
 		panel.setLayout(null);
 
-		diceOneButton = new JButton("1");
+		diceOneButton = new JButton();
 		diceOneButton.setBounds(48, 12, 64, 64);
 		panel.add(diceOneButton);
 
-		diceTwoButton = new JButton("2");
+		diceTwoButton = new JButton();
 		diceTwoButton.setBounds(48, 88, 64, 64);
 		panel.add(diceTwoButton);
 
-		diceThreeButton = new JButton("3");
+		diceThreeButton = new JButton();
 		diceThreeButton.setBounds(48, 164, 64, 64);
 		panel.add(diceThreeButton);
 
-		diceFourButton = new JButton("4");
+		diceFourButton = new JButton();
 		diceFourButton.setBounds(48, 240, 64, 64);
 		panel.add(diceFourButton);
 
-		diceFiveButton = new JButton("5");
+		diceFiveButton = new JButton();
 		diceFiveButton.setBounds(48, 310, 64, 64);
 		panel.add(diceFiveButton);
 
 		JButton helpButton = new JButton("Help");
-		helpButton.setBounds(569, 498, 155, 25);
+		helpButton.setBounds(569, 547, 155, 25);
 		contentPane.add(helpButton);
+
+		JScrollBar scrollBar = new JScrollBar();
+		scrollBar.setBounds(437, 12, 17, 59);
+		contentPane.add(scrollBar);
+
+		JTextPane textPane = new JTextPane();
+		textPane.setBounds(12, 12, 442, 58);
+		contentPane.add(textPane);
 
 		diceOneButton.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent arg0) {

@@ -1,5 +1,6 @@
 package com.dhbw.programming;
 
+import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -10,10 +11,12 @@ import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JEditorPane;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JSpinner;
 import javax.swing.JTable;
 import javax.swing.SpinnerNumberModel;
@@ -35,9 +38,14 @@ public class MainFrame extends JFrame {
 
 	// test f�r pushen
 
+	private JLabel lblIWantTo_1;
+	private JSpinner botSpinner;
+	private JLabel lblComputerPlayers;
+
 	private JPanel contentPane;
 	private final Action action = new SwingAction();
 	private JTable nameTable;
+	private int botCount = 0;
 	private int playerCount;
 	private ArrayList<Player> playerList = new ArrayList<Player>();
 	private Data data = new Data(new OfAKind(1), new OfAKind(2), new OfAKind(3), new OfAKind(4), new OfAKind(5),
@@ -126,18 +134,38 @@ public class MainFrame extends JFrame {
 		botCheckBox.setAction(action);
 		botCheckBox.setBounds(35, 35, 28, 23);
 		contentPane.add(botCheckBox);
+		botCheckBox.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (botCheckBox.isSelected()) {
+					System.out.println("Bots activated. Bleep bloop.");
+					lblIWantTo_1.setEnabled(true);
+					lblComputerPlayers.setEnabled(true);
+					botSpinner.setEnabled(true);
+					tableModel.addRow(new Object[] { "Bot " + (botCount), "Bot" + (botCount) });
+					playerSpinner.setEnabled(false);
 
-		JSpinner botSpinner = new JSpinner();
+				} else {
+					System.out.println("Bots deactivated. Bleeeeeeep. :(");
+					lblIWantTo_1.setEnabled(false);
+					lblComputerPlayers.setEnabled(false);
+					botSpinner.setEnabled(false);
+					playerSpinner.setEnabled(true);
+				}
+			}
+		});
+
+		botSpinner = new JSpinner();
+		botSpinner.setModel(new SpinnerNumberModel(new Integer(1), null, null, new Integer(1)));
 		botSpinner.setEnabled(false);
 		botSpinner.setBounds(187, 38, 28, 20);
 		contentPane.add(botSpinner);
 
-		JLabel lblComputerPlayers = new JLabel("computer players.");
+		lblComputerPlayers = new JLabel("computer players.");
 		lblComputerPlayers.setEnabled(false);
 		lblComputerPlayers.setBounds(219, 39, 153, 15);
 		contentPane.add(lblComputerPlayers);
 
-		JLabel lblIWantTo_1 = new JLabel("I want to include");
+		lblIWantTo_1 = new JLabel("I want to include");
 		lblIWantTo_1.setEnabled(false);
 		lblIWantTo_1.setBounds(64, 39, 128, 15);
 		contentPane.add(lblIWantTo_1);
@@ -145,15 +173,22 @@ public class MainFrame extends JFrame {
 		JButton aboutButton = new JButton("About");
 		aboutButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String about = "<HTML><BODY BGCOLOR=#FFCCCC>this</BODY></HTML>";
-				JOptionPane.showMessageDialog(contentPane, about, "About", JOptionPane.PLAIN_MESSAGE, null);
+				String about = "This project was created as an assignment for four students of the DHBW Mannheim, DE. <br><br>"
+						+ "It implements a simple version of the game Yahtzee. <br><br>"
+						+ "To play, select the number of players (and, if you wish, the amount of bots to compete with), change their names by clicking in the right column of the player table, and click start to begin."
+						+ " Rules of the game and further instructions are available once the game has begun.";
+				JEditorPane textArea = new JEditorPane("text/html", about);
+				JScrollPane scrollPane = new JScrollPane(textArea);
+				scrollPane.setPreferredSize(new Dimension(280, 280));
+				JOptionPane.showMessageDialog(contentPane, scrollPane, "About", JOptionPane.PLAIN_MESSAGE);
+
 			}
 		});
 		aboutButton.setBounds(12, 210, 117, 25);
 		contentPane.add(aboutButton);
 
 		nameTable = new JTable(tableModel);
-		nameTable.setBounds(12, 66, 360, 132);
+		nameTable.setBounds(0, 53, 360, 132);
 		contentPane.add(nameTable);
 		tableModel.addColumn("Col1");
 		tableModel.addColumn("Col2");
