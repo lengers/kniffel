@@ -90,12 +90,20 @@ public class MainFrame extends JFrame {
 		startButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println(playerCount);
+				// reading player names
 				for (int i = 0; i < playerCount; i++) {
-					System.out.println("Creating player " + i);
-					Player player = new Player("Player" + i, 0, 0, 0, 0, data);
-					playerList.add(player); // new Player((String) "Player" + i,
-											// 0, 0, 0, 0, data));
+					System.out.println(tableModel.getValueAt(1, 1).toString());
+					playerList.add(new Player((tableModel.getValueAt(i, 1).toString()), 0, 0, 0, 0, data));
+					System.out.println("Creating Player with name: " + playerList.get(i).getName());
 				}
+//				System.out.println(tableModel.getValueAt(0, 1).toString());
+//				System.out.println(tableModel.getValueAt(1, 1).toString());
+//				for (int i = 0; i < playerCount; i++) {
+//					System.out.println("Creating player " + i);
+//					Player player = new Player("Player" + i, 0, 0, 0, 0, data);
+//					playerList.add(player); // new Player((String) "Player" + i,
+											// 0, 0, 0, 0, data));
+//				}
 				GameFrame.main(playerList, playerCount);
 			}
 		});

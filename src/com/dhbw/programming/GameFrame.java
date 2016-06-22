@@ -41,7 +41,15 @@ public class GameFrame extends JFrame {
 			// all cells false
 			return false;
 		}
+		
+		
 	};
+	
+// Mouse Action Listener implementation
+//	gameTableModel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+//	gameTableModel.setCellSelectionEnabled(true);
+//	gameTableModel.getSelectionModel();
+//	gameTableModel.setRowSelectionAllowed(false);
 
 	private void rollDice() {
 		diceModell.rollDice(diceOneButton.isEnabled(), diceTwoButton.isEnabled(), diceThreeButton.isEnabled(),
@@ -52,8 +60,8 @@ public class GameFrame extends JFrame {
 		JButton[] buttons = { diceOneButton, diceTwoButton, diceThreeButton, diceFourButton, diceFiveButton };
 
 		for (int i = 0; i < buttons.length; i++) {
-			System.out.println(dice[i]);
-			System.out.println(icons[dice[i] - 1]);
+//			System.out.println(dice[i]);
+//			System.out.println(icons[dice[i] - 1]);
 			ImageIcon icon = icons[dice[i] - 1];
 			buttons[i].setIcon(icon);
 		}
@@ -119,7 +127,38 @@ public class GameFrame extends JFrame {
 			gameTableModel.addColumn("Player" + i);
 		}
 		gameTableModel.addRow(new Object[] { "Info" });
-		table.getColumn("Info");
+		
+		
+		// creating Table
+		gameTableModel.addRow(new Object[] {"nur Einser zählen"});
+		gameTableModel.addRow(new Object[] {"nur Zweier zählen"});
+		gameTableModel.addRow(new Object[] {"nur Dreier zählen"});
+		gameTableModel.addRow(new Object[] {"nur Vierer zählen"});
+		gameTableModel.addRow(new Object[] {"nur Fünfer zählen"});
+		gameTableModel.addRow(new Object[] {"nur Sechser zählen"});
+		gameTableModel.addRow(new Object[] {"gesamt"});
+		gameTableModel.addRow(new Object[] {"Bonus bei 63 oder mehr"});
+		gameTableModel.addRow(new Object[] {"gesamt oberer Teil"});
+		gameTableModel.addRow(new Object[] {"Dreierpasch"});
+		gameTableModel.addRow(new Object[] {"Viererpasch"});
+		gameTableModel.addRow(new Object[] {"Full-House"});
+		gameTableModel.addRow(new Object[] {"Kleine Straße"});
+		gameTableModel.addRow(new Object[] {"Große Straße"});
+		gameTableModel.addRow(new Object[] {"Kniffel"});
+		gameTableModel.addRow(new Object[] {"Chance"});
+		gameTableModel.addRow(new Object[] {"gesamt unterer Teil"});
+		gameTableModel.addRow(new Object[] {"gesamt oberer Teil"});
+		gameTableModel.addRow(new Object[] {"Endsumme"});
+		
+		// writing player names in jTable
+		for (int i = 0; i < playerCount; i++) {
+			System.out.println("Writing player " + (i));
+			gameTableModel.setValueAt(playerList.get(i).getName(), 0, i+1);
+		}
+		
+		
+		
+//		table.getColumn("Info");
 		table.setCellSelectionEnabled(true);
 		// table.isCellSelected(1, 1) {
 		// setForeground(Color.blue);

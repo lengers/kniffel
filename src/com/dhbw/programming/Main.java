@@ -6,7 +6,11 @@ import java.util.Arrays;
 import com.dhbw.programming.modell.Data;
 import com.dhbw.programming.modell.Player;
 
+//import com.dhbw.programming.modell.Data;
+//import com.dhbw.programming.modell.Player;
+
 public class Main {
+	
 
 	public static int[] numbers = new int[6];
 	static int playerCount;
@@ -14,12 +18,19 @@ public class Main {
 	static Object lastOperation;
 	static ArrayList<Player> playerList;
 
+	/**
+	 * @wbp.parser.entryPoint
+	 */
 	public static void main(String[] args) {
 
 		MainFrame.main(null);
+		//test
 
 	}
 
+	/**
+	 * @wbp.parser.entryPoint
+	 */
 	private static void getValue(int[] dice, Player player) {
 		Data data = player.getData();
 		Arrays.fill(numbers, 0);
