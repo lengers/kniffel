@@ -36,7 +36,7 @@ import com.dhbw.programming.modell.Player;
 
 public class MainFrame extends JFrame {
 
-	// test für pushen 23 safjksjfkejflkwjf
+	// test für pushen
 
 	private JLabel lblIWantTo_1;
 	private JSpinner botSpinner;
