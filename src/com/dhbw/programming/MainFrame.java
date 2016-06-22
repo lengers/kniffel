@@ -33,7 +33,7 @@ import com.dhbw.programming.modell.Player;
 
 public class MainFrame extends JFrame {
 
-	// test fï¿½r pushen
+	// test für pushen 23 safjksjfkejflkwjf
 
 	private JPanel contentPane;
 	private final Action action = new SwingAction();
