@@ -38,12 +38,6 @@ import com.dhbw.programming.modell.ThreeOfAKind;
 
 public class MainFrame extends JFrame {
 
-<<<<<<< HEAD
-	// test fï¿½r pushen 23 safjksjfkejflkwjf
-=======
-	// test für pushen
->>>>>>> d578b1450221c0eb61d8d7b4130a207240e6679b
-
 	private JLabel lblIWantTo_1;
 	private JSpinner botSpinner;
 	private JLabel lblComputerPlayers;
