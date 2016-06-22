@@ -28,15 +28,17 @@ import javax.swing.table.DefaultTableModel;
 import com.dhbw.programming.modell.BigStraight;
 import com.dhbw.programming.modell.Chance;
 import com.dhbw.programming.modell.Data;
+import com.dhbw.programming.modell.FourOfAKind;
 import com.dhbw.programming.modell.FullHouse;
 import com.dhbw.programming.modell.Kniffel;
 import com.dhbw.programming.modell.LittleStraight;
 import com.dhbw.programming.modell.OfAKind;
 import com.dhbw.programming.modell.Player;
+import com.dhbw.programming.modell.ThreeOfAKind;
 
 public class MainFrame extends JFrame {
 
-	// test für pushen 23 safjksjfkejflkwjf
+	// test fï¿½r pushen 23 safjksjfkejflkwjf
 
 	private JLabel lblIWantTo_1;
 	private JSpinner botSpinner;
@@ -49,7 +51,8 @@ public class MainFrame extends JFrame {
 	private int playerCount;
 	private ArrayList<Player> playerList = new ArrayList<Player>();
 	private Data data = new Data(new OfAKind(1), new OfAKind(2), new OfAKind(3), new OfAKind(4), new OfAKind(5),
-			new OfAKind(6), new Kniffel(), new FullHouse(), new LittleStraight(), new BigStraight(), new Chance());
+			new OfAKind(6), new ThreeOfAKind(), new FourOfAKind(), new FullHouse(), new LittleStraight(),
+			new BigStraight(), new Kniffel(), new Chance());
 	private DefaultTableModel tableModel = new DefaultTableModel() {
 		@Override
 		public boolean isCellEditable(int row, int column) {

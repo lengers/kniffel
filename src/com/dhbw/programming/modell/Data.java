@@ -8,6 +8,8 @@ public class Data {
 	private OfAKind ofakindFive;
 	private OfAKind ofakindSix;
 
+	private ThreeOfAKind threeofakind;
+	private FourOfAKind fourofakind;
 	private Kniffel kniffel;
 	private FullHouse fullHouse;
 	private LittleStraight littleStraight;
@@ -15,8 +17,9 @@ public class Data {
 	private Chance chance;
 
 	public Data(OfAKind threeofakindOne, OfAKind threeofakindTwo, OfAKind threeofakindThree, OfAKind threeofakindFour,
-			OfAKind threeofakindFive, OfAKind threeofakindSix, Kniffel kniffel, FullHouse fullHouse,
-			LittleStraight littleStraight, BigStraight bigStraight, Chance chance) {
+			OfAKind threeofakindFive, OfAKind threeofakindSix, ThreeOfAKind threeofakind, FourOfAKind fourofakind,
+			FullHouse fullHouse, LittleStraight littleStraight, BigStraight bigStraight, Kniffel kniffel,
+			Chance chance) {
 		super();
 		ofakindOne = threeofakindOne;
 		ofakindTwo = threeofakindTwo;
@@ -24,6 +27,8 @@ public class Data {
 		ofakindFour = threeofakindFour;
 		ofakindFive = threeofakindFive;
 		ofakindSix = threeofakindSix;
+		this.fourofakind = fourofakind;
+		this.threeofakind = threeofakind;
 		this.kniffel = kniffel;
 		this.fullHouse = fullHouse;
 		this.littleStraight = littleStraight;
@@ -88,6 +93,26 @@ public class Data {
 		ofakindSix.setNumber(number);
 		ofakindSix.setPoints(points);
 		ofakindSix.setLock(lock);
+	}
+
+	public ThreeOfAKind getThreeofakind() {
+		return threeofakind;
+	}
+
+	public void setThreeofakind(int number, int points, Boolean lock) {
+		threeofakind.setLock(lock);
+		threeofakind.setPoints(points);
+		threeofakind.setNumber(number);
+	}
+
+	public FourOfAKind getFourofakind() {
+		return fourofakind;
+	}
+
+	public void setFourofakind(int number, int points, Boolean lock) {
+		fourofakind.setLock(lock);
+		fourofakind.setPoints(points);
+		fourofakind.setNumber(number);
 	}
 
 	public Kniffel getKniffel() {

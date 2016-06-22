@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.stream.IntStream;
 
 import com.dhbw.programming.modell.Data;
+import com.dhbw.programming.modell.OfAKind;
 import com.dhbw.programming.modell.Player;
 
 public class Dice {
@@ -74,110 +75,77 @@ public class Dice {
 	private void determinePoints(Player player) {
 		Data data = player.getData();
 
-		for (int i = 0; i < numbers.length; i++) {
-			if (numbers[i] >= 4) {
-				// Five-of-a-kind, called "Kniffel", results in 50 points
-				if (numbers[i] == 5 && data.getKniffel().getLock() == false) {
-					data.getKniffel().setShow(true);
-					// player.setTotalpoints(player.getTotalpoints() +
-					// data.getKniffel().getPoints());
-					// data.setKniffel(true);
-					// lastOperation = data.getKniffel();
-					// Four-of-a-kind, add all pips as points
-				}
-				switch (i) {
-				case 1:
-					if (data.getOfakindOne().getLock() == false) {
-						data.getOfakindOne().setPoints(numbers[i] * i);
-						data.getOfakindOne().setShow(true);
-					}
-					break;
-				case 2:
-					if (data.getOfakindTwo().getLock() == false) {
-						data.getOfakindTwo().setPoints(numbers[i] * i);
-						data.getOfakindTwo().setShow(true);
-					}
-					break;
-				case 3:
-					if (data.getOfakindThree().getLock() == false) {
-						data.getOfakindThree().setPoints(numbers[i] * i);
-						data.getOfakindThree().setShow(true);
-					}
-					break;
-				case 4:
-					if (data.getOfakindFour().getLock() == false) {
-						data.getOfakindThree().setPoints(numbers[i] * i);
-						data.getOfakindThree().setShow(true);
-					}
-					break;
-				case 5:
-					if (data.getOfakindFive().getLock() == false) {
-						data.getOfakindFive().setPoints(numbers[i] * i);
-						data.getOfakindFive().setShow(true);
-					}
-					break;
-				case 6:
-					if (data.getOfakindSix().getLock() == false) {
-						data.getOfakindSix().setPoints(numbers[i] * i);
-						data.getOfakindSix().setShow(true);
-					}
-					break;
-				}
+		OfAKind[] kinds = { data.getOfakindOne(), data.getOfakindTwo(), data.getOfakindThree(), data.getOfakindFour(),
+				data.getOfakindFive(), data.getOfakindSix() };
 
-			} else if (numbers[i] == 3) {
-				if (pips < 2) {
+		for (int i = 0; i < numbers.length; i++) {
+			// Chance always possible
+			if (data.getChance().getLock() == false) {
+
+			}
+			if (numbers[i] >= 2) {
+				if (numbers[i] == 3) {
+					if (data.getThreeofakind().getLock() == false) {
+						data.getThreeofakind().setPoints(pips);
+						data.getThreeofakind().setShow(true);
+					} else if (kinds[i].getLock() == false) {
+						kinds[i].setPoints(i * 3);
+						kinds[i].setShow(true);
+					} else {
+						for (int j = 0; j < numbers.length; j++) {
+							if (j != i && j == 2 && data.getFullHouse().getLock() == false) {
+								data.getFullHouse().setShow(true);
+							}
+						}
+					}
+
+				} else if (numbers[i] == 4) {
+					if (data.getFourofakind().getLock() == false) {
+						data.getFourofakind().setNumber(pips);
+						data.getFourofakind().setShow(true);
+					} else if (kinds[i].getLock() == false) {
+						kinds[i].setPoints(i * 4);
+						kinds[i].setShow(true);
+
+					}
+
+				} else if (numbers[i] == 5) {
+					if (data.getKniffel().getLock() == false) {
+						data.getKniffel().setShow(true);
+					} else if (kinds[i].getLock() == false && data.getKniffel().getAdditionalKniffel() == true) {
+						// Additional kniffel
+						data.getKniffel().setAdditionalKniffel(true);
+						kinds[i].setPoints(50);
+						kinds[i].setShow(true);
+					}
 
 				} else {
-
-					// switch (i) {
-					// case 1:
-					// if (data.getThreeofakindOne().getLock() == false) {
-					// player.setTotalpoints(player.getTotalpoints() + pips);
-					// data.setThreeofakindOne(1, pips, true);
-					// System.out.println("You rolled a three-of-a-kind!");
-					// }
-					// break;
-					// case 2:
-					// if (data.getThreeofakindTwo().getLock() == false) {
-					// player.setTotalpoints(player.getTotalpoints() + pips);
-					// data.setThreeofakindTwo(2, pips, true);
-					// }
-					// break;
-					// case 3:
-					// if (data.getThreeofakindThree().getLock() == false) {
-					// player.setTotalpoints(player.getTotalpoints() + pips);
-					// data.setThreeofakindThree(3, pips, true);
-					// }
-					// break;
-					// case 4:
-					// if (data.getThreeofakindFour().getLock() == false) {
-					// player.setTotalpoints(player.getTotalpoints() + pips);
-					// data.setThreeofakindFour(4, pips, true);
-					// }
-					// break;
-					// case 5:
-					// if (data.getThreeofakindFive().getLock() == false) {
-					// player.setTotalpoints(player.getTotalpoints() + pips);
-					// data.setThreeofakindFive(5, pips, true);
-					// }
-					// break;
-					// case 6:
-					// if (data.getThreeofakindSix().getLock() == false) {
-					// player.setTotalpoints(player.getTotalpoints() + pips);
-					// data.setThreeofakindSix(6, pips, true);
-					// }
-					// break;
-					// default:
-					// System.out.println("No field unlocked, error.");
-					// break;
+					// only 2#
+					kinds[i].setPoints(i * 2);
+					kinds[i].setShow(true);
 				}
-			} else if (numbers[0] == 1 && numbers[1] == 1 && numbers[2] == 1 && numbers[3] == 1 && numbers[4] == 1) {
-				data.setLittleStraight(true);
-				player.setTotalpoints(player.getTotalpoints() + data.getLittleStraight().getPoints());
-			} else if (numbers[1] == 1 && numbers[2] == 1 && numbers[3] == 1 && numbers[4] == 1 && numbers[5] == 1) {
-				data.setBigStraight(true);
-				player.setTotalpoints(player.getTotalpoints() + data.getBigStraight().getPoints());
+			} else {
+				// only Straight remains
+				int n = 0;
+				for (int z = 0; z <= 3; z++) {
+					for (int j = z; j < numbers.length; j++) {
+						if (numbers[j] >= 1 && numbers[j] < 3) {
+							n += 1;
+						}
+						if (numbers[j] == 0) {
+							break;
+						}
+					}
+					if (n == 4 && data.getLittleStraight().getLock() == false) {
+						data.getLittleStraight().setShow(true);
+					} else if (n >= 5 && data.getBigStraight().getLock() == false) {
+						data.getBigStraight().setShow(true);
+						data.getLittleStraight().setShow(true);
+					}
+					n = 0;
+				}
 			}
+
 		}
 
 	}

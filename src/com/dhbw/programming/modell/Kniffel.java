@@ -4,6 +4,7 @@ public class Kniffel {
 	private int points;
 	private Boolean lock;
 	private Boolean show = false;
+	private Boolean additionalKniffel = false;
 
 	public Kniffel() {
 		this.points = 50;
@@ -32,6 +33,14 @@ public class Kniffel {
 
 	public void setShow(Boolean show) {
 		this.show = show;
+	}
+
+	public Boolean getAdditionalKniffel() {
+		return additionalKniffel;
+	}
+
+	public void setAdditionalKniffel(Boolean additionalKniffel) {
+		this.additionalKniffel = additionalKniffel;
 	}
 
 }
