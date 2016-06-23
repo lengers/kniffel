@@ -31,6 +31,8 @@ public class GameFrame extends JFrame {
 	private ArrayList<Player> playerList;
 	private int playerCount;
 	private int rollCount = 0;
+	private String color[][];
+	private TableCellRenderer tableCellRenderer = new com.dhbw.programming.help.ColoredTableCellRenderer();
 	// private
 	private ImageIcon[] icons = { new ImageIcon(Main.class.getResource("Dice1.png")),
 			new ImageIcon(Main.class.getResource("Dice2.png")), new ImageIcon(Main.class.getResource("Dice3.png")),
@@ -44,17 +46,13 @@ public class GameFrame extends JFrame {
 			// all cells false
 			return false;
 		}
-/*******************************************************************************************************/		
-//		// Notwendig für Einfaerbung
+		// Notwendig für Einfaerbung
 		@Override
 		public Class<?> getColumnClass(int columnIndex) {
  	      return getValueAt(0, columnIndex).getClass();
  	   }		
 	};
-	private String color[][];
-	private TableCellRenderer tableCellRenderer = new com.dhbw.programming.help.ColoredTableCellRenderer();
-/*******************************************************************************************************/
-	
+
 
 	private void consoleSend(String string) {
 		textArea.setText(textArea.getText() + "\n" + string);
@@ -131,10 +129,7 @@ public class GameFrame extends JFrame {
 		contentPane.add(doneButton);
 
 		table = new JTable(gameTableModel);
-/*******************************************************************************************************/		
-		table.setDefaultRenderer( String.class, tableCellRenderer );
-/*******************************************************************************************************/
-		
+		table.setDefaultRenderer( String.class, tableCellRenderer );		
 		table.setBounds(12, 83, 545, 518);
 		contentPane.add(table);
 		gameTableModel.addColumn("Info");
@@ -161,28 +156,25 @@ public class GameFrame extends JFrame {
 			gameTableModel.setValueAt(playerList.get(i).getName(), 0, i + 1);
 		}
 		
-		/*******************************************************************************************************/		
 		System.out.println("player" + playerCount);
-		String[][] color = new String[playerCount +1][21];	
+		String[][] color = new String[playerCount + 1][21];	
 		
 		for (int i = 0; i < color.length; i++){
         	for (int j = 0; j < 21; j++){
         		color[i][j] = "white";
         	}
         }
-        
+		
+		// Einmaliges Aufrufen der Einfaerben-Funktion
+		((com.dhbw.programming.help.ColoredTableCellRenderer) 
+				tableCellRenderer).dyeTable(color, table, gameTableModel , false, false, 0 , 2 );
+
 		color[0][0] = "grey";
 		color[0][5] = "green";
 		color[0][8] = "red";
 		color[1][1] = "grey";
 		color[1][6] = "green";
 		color[1][9] = "green";
-		
-		
-
-		((com.dhbw.programming.help.ColoredTableCellRenderer) tableCellRenderer).dyeTable(color, table, gameTableModel , false, false, 0 , 2 );
-/*******************************************************************************************************/
-
 
 		// table.getColumn("Info");
 		table.setCellSelectionEnabled(true);
