@@ -5,6 +5,8 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.util.ArrayList;
 
 import javax.swing.AbstractAction;
@@ -96,14 +98,14 @@ public class MainFrame extends JFrame {
 					playerList.add(new Player((tableModel.getValueAt(i, 1).toString()), 0, 0, 0, 0, data));
 					System.out.println("Creating Player with name: " + playerList.get(i).getName());
 				}
-//				System.out.println(tableModel.getValueAt(0, 1).toString());
-//				System.out.println(tableModel.getValueAt(1, 1).toString());
-//				for (int i = 0; i < playerCount; i++) {
-//					System.out.println("Creating player " + i);
-//					Player player = new Player("Player" + i, 0, 0, 0, 0, data);
-//					playerList.add(player); // new Player((String) "Player" + i,
-											// 0, 0, 0, 0, data));
-//				}
+				// System.out.println(tableModel.getValueAt(0, 1).toString());
+				// System.out.println(tableModel.getValueAt(1, 1).toString());
+				// for (int i = 0; i < playerCount; i++) {
+				// System.out.println("Creating player " + i);
+				// Player player = new Player("Player" + i, 0, 0, 0, 0, data);
+				// playerList.add(player); // new Player((String) "Player" + i,
+				// 0, 0, 0, 0, data));
+				// }
 				GameFrame.main(playerList, playerCount);
 			}
 		});
@@ -197,6 +199,19 @@ public class MainFrame extends JFrame {
 		contentPane.add(aboutButton);
 
 		nameTable = new JTable(tableModel);
+		nameTable.addFocusListener(new FocusListener() {
+			// Disable editing upon focus lost. Prohibits lost of last player
+			// name that would otherwise not be saved as users, inconsiderate as
+			// they are, do not press Enter after cell editing.
+			@Override
+			public void focusLost(FocusEvent e) {
+				nameTable.getCellEditor().stopCellEditing();
+			}
+
+			@Override
+			public void focusGained(FocusEvent e) {
+			}
+		});
 		nameTable.setBounds(0, 53, 360, 132);
 		contentPane.add(nameTable);
 		tableModel.addColumn("Col1");

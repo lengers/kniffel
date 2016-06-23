@@ -1,0 +1,13 @@
+This project was created as an assignment for four students 
+of the DHBW Mannheim, DE.
+
+
+It implements a simple version of the game Yahtzee.
+
+
+To play, select the number of players (and, if you wish, 
+the amount of bots to compete with), change their names by 
+clicking in the right column of the player table, and click 
+start to begin.
+Rules of the game and further instructions are available once 
+the game has begun.
