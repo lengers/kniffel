@@ -14,6 +14,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.ScrollPaneConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
@@ -45,12 +46,6 @@ public class GameFrame extends JFrame {
 
 	};
 
-	// Mouse Action Listener implementation
-	// gameTableModel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-	// gameTableModel.setCellSelectionEnabled(true);
-	// gameTableModel.getSelectionModel();
-	// gameTableModel.setRowSelectionAllowed(false);
-
 	private void consoleSend(String string) {
 		textArea.setText(textArea.getText() + "\n" + string);
 		textArea.repaint();
@@ -65,17 +60,9 @@ public class GameFrame extends JFrame {
 		JButton[] buttons = { diceOneButton, diceTwoButton, diceThreeButton, diceFourButton, diceFiveButton };
 
 		for (int i = 0; i < buttons.length; i++) {
-			// System.out.println(dice[i]);
-			// System.out.println(icons[dice[i] - 1]);
 			ImageIcon icon = icons[dice[i] - 1];
 			buttons[i].setIcon(icon);
 		}
-
-		// diceOneButton.setText(String.valueOf(dice[0]));
-		// diceTwoButton.setText(String.valueOf(dice[1]));
-		// diceThreeButton.setText(String.valueOf(dice[2]));
-		// diceFourButton.setText(String.valueOf(dice[3]));
-		// diceFiveButton.setText(String.valueOf(dice[4]));
 
 	}
 
@@ -145,25 +132,14 @@ public class GameFrame extends JFrame {
 		gameTableModel.addRow(new Object[] { "Info" });
 
 		// creating Table
-		gameTableModel.addRow(new Object[] { "nur Einser zählen" });
-		gameTableModel.addRow(new Object[] { "nur Zweier zählen" });
-		gameTableModel.addRow(new Object[] { "nur Dreier zählen" });
-		gameTableModel.addRow(new Object[] { "nur Vierer zählen" });
-		gameTableModel.addRow(new Object[] { "nur Fünfer zählen" });
-		gameTableModel.addRow(new Object[] { "nur Sechser zählen" });
-		gameTableModel.addRow(new Object[] { "gesamt" });
-		gameTableModel.addRow(new Object[] { "Bonus bei 63 oder mehr" });
-		gameTableModel.addRow(new Object[] { "gesamt oberer Teil" });
-		gameTableModel.addRow(new Object[] { "Dreierpasch" });
-		gameTableModel.addRow(new Object[] { "Viererpasch" });
-		gameTableModel.addRow(new Object[] { "Full-House" });
-		gameTableModel.addRow(new Object[] { "Kleine Straße" });
-		gameTableModel.addRow(new Object[] { "Große Straße" });
-		gameTableModel.addRow(new Object[] { "Kniffel" });
-		gameTableModel.addRow(new Object[] { "Chance" });
-		gameTableModel.addRow(new Object[] { "gesamt unterer Teil" });
-		gameTableModel.addRow(new Object[] { "gesamt oberer Teil" });
-		gameTableModel.addRow(new Object[] { "Endsumme" });
+		String[] tableDescriptions = { "nur Einser zählen", "nur Zweier zählen", "nur Dreier zählen",
+				"nur Vierer zählen", "nur Fünfer zählen", "nur Sechser zählen", "gesamt", "Bonus bei 63 oder mehr",
+				"gesamt oberer Teil", "Dreierpasch", "Viererpasch", "Full-House", "Kleine Straße", "Große Straße",
+				"Kniffel", "Chance", "gesamt unterer Teil", "gesamt oberer Teil", "Endsumme" };
+
+		for (int i = 0; i < tableDescriptions.length; i++) {
+			gameTableModel.addRow(new Object[] { tableDescriptions[i] });
+		}
 
 		// writing player names in jTable
 		for (int i = 0; i < playerCount; i++) {
@@ -215,8 +191,9 @@ public class GameFrame extends JFrame {
 		// textPane.setBounds(12, 13, 545, 58);
 		// contentPane.add(textPane);
 
-		textArea = new JEditorPane("text/html", "");
-		JScrollPane scrollPane = new JScrollPane(textArea);
+		textArea = new JEditorPane("text", "Let's begin!");
+		JScrollPane scrollPane = new JScrollPane(textArea, ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER,
+				ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		scrollPane.setBounds(12, 13, 545, 58);
 		textArea.setEditable(false);
 		contentPane.add(scrollPane);
