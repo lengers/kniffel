@@ -2,12 +2,14 @@ package com.dhbw.programming.modell;
 
 public class Throw {
 	private int points;
+	private int tmp;
 	private Boolean lock;
 	private Boolean show;
 
-	public Throw(int points) {
+	public Throw(int tmp) {
 		this.lock = false;
 		this.show = false;
+		this.tmp = tmp;
 	}
 
 	public int getPoints() {
@@ -31,6 +33,12 @@ public class Throw {
 	}
 
 	public void setShow(Boolean show) {
+		if (show) {
+			points = tmp;
+		} else {
+			tmp = points;
+			points = 0;
+		}
 		this.show = show;
 	}
 

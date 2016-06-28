@@ -155,6 +155,7 @@ public class GameFrame extends JFrame {
 							System.out.println(color[iterator.nextIndex()][i]);
 							color[iterator.nextIndex()][(i + 1)] = "green";
 							System.out.println("Coloring [" + iterator.nextIndex() + "][" + (i + 1) + "] green.");
+							gameTableModel.setValueAt(potentialPoints[i].getPoints(), (i + 1), iterator.nextIndex());
 						} else {
 							color[iterator.nextIndex()][(i + 1)] = "white";
 							System.out.println("Coloring [" + iterator.nextIndex() + "][" + (i + 1) + "] white.");

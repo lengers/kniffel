@@ -79,40 +79,53 @@ public class Dice {
 	private void determinePoints(Player player) {
 		Data data = player.getData();
 
+		System.out.println(data.getChance());
+
 		OfAKind[] kinds = { data.getOfakindOne(), data.getOfakindTwo(), data.getOfakindThree(), data.getOfakindFour(),
 				data.getOfakindFive(), data.getOfakindSix() };
 
 		for (int i = 0; i < numbers.length; i++) {
 			// Chance always possible
-			// if (data.getChance().getLock() == false) {
-			//
-			// }
+			if (data.getChance().getLock() == false) {
+				data.getChance().setPoints(pips);
+				data.getChance().setShow(true);
+				System.out.println("Chance show -> true");
+			}
 			if (numbers[i] >= 2) {
-				if (numbers[i] == 3) {
+				if (numbers[i] >= 3) {
 					if (data.getThreeofakind().getLock() == false) {
 						data.getThreeofakind().setPoints(pips);
 						data.getThreeofakind().setShow(true);
 						System.out.println("ThreeOfAKind show -> true");
-					} else if (kinds[i].getLock() == false) {
-						kinds[i].setPoints(i * 3);
-						kinds[i].setShow(true);
-						System.out.println("kinds[" + i + "] show -> true");
 					} else {
-						for (int j = 0; j < numbers.length; j++) {
-							if (j != i && j == 2 && data.getFullHouse().getLock() == false) {
-								data.getFullHouse().setShow(true);
-								System.out.println("FullHouse show -> true");
+						data.getThreeofakind().setShow(false);
+					}
+					if (numbers[i] == 3) {
+						if (kinds[i].getLock() == false) {
+							kinds[i].setPoints((i + 1) * 3);
+							kinds[i].setShow(true);
+							System.out.println("kinds[" + i + "] show -> true");
+						} else {
+							for (int j = 0; j < numbers.length; j++) {
+								if (j != i && j == 2 && data.getFullHouse().getLock() == false) {
+									data.getFullHouse().setShow(true);
+									System.out.println("FullHouse show -> true");
+								}
 							}
 						}
+					} else {
+						data.getFullHouse().setShow(false);
 					}
-
 				} else if (numbers[i] == 4) {
 					if (data.getFourofakind().getLock() == false) {
-						data.getFourofakind().setNumber(pips);
+						data.getFourofakind().setPoints(pips);
 						data.getFourofakind().setShow(true);
 						System.out.println("FourOfAKind show -> true");
-					} else if (kinds[i].getLock() == false) {
-						kinds[i].setPoints(i * 4);
+					} else {
+						data.getFourofakind().setShow(false);
+					}
+					if (kinds[i].getLock() == false) {
+						kinds[i].setPoints((i + 1) * 4);
 						kinds[i].setShow(true);
 						System.out.println("kinds[" + i + "] show -> true");
 
@@ -122,7 +135,10 @@ public class Dice {
 					if (data.getKniffel().getLock() == false) {
 						data.getKniffel().setShow(true);
 						System.out.println("Kniffel show -> true");
-					} else if (kinds[i].getLock() == false && data.getKniffel().getAdditionalKniffel() == true) {
+					} else {
+						data.getKniffel().setShow(false);
+					}
+					if (kinds[i].getLock() == false && data.getKniffel().getAdditionalKniffel() == true) {
 						// Additional kniffel
 						data.getKniffel().setAdditionalKniffel(true);
 						kinds[i].setPoints(50);
@@ -132,12 +148,21 @@ public class Dice {
 
 				} else {
 					// only 2#
-					kinds[i].setPoints(i * 2);
+					kinds[i].setPoints((i + 1) * 2);
 					kinds[i].setShow(true);
 					System.out.println("kinds[" + i + "] show -> true");
 				}
 			} else {
-				// only Straight remains
+				// only Straight and single kindOf remains
+				if (i > 0) {
+					kinds[i].setPoints(i + 1);
+					kinds[i].setShow(true);
+					System.out.println("kinds[" + i + "] show -> true");
+				} else {
+					kinds[i].setShow(false);
+				}
+
+				// Straight
 				int n = 0;
 				for (int z = 0; z <= 3; z++) {
 					for (int j = z; j < numbers.length; j++) {
@@ -151,11 +176,16 @@ public class Dice {
 					if (n == 4 && data.getLittleStraight().getLock() == false) {
 						data.getLittleStraight().setShow(true);
 						System.out.println("LittleStraight show -> true");
-					} else if (n >= 5 && data.getBigStraight().getLock() == false) {
+					} else {
+						data.getLittleStraight().setShow(false);
+					}
+					if (n >= 5 && data.getBigStraight().getLock() == false) {
 						data.getBigStraight().setShow(true);
 						System.out.println("BigStraight show -> true");
 						data.getLittleStraight().setShow(true);
 						System.out.println("LittleStraight show -> true");
+					} else {
+						data.getBigStraight().setShow(false);
 					}
 					n = 0;
 				}

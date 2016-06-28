@@ -33,6 +33,7 @@ public class Data {
 		this.fullHouse = fullHouse;
 		this.littleStraight = littleStraight;
 		this.bigStraight = bigStraight;
+		this.chance = chance;
 	}
 
 	public OfAKind getOfakindOne() {
