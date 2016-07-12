@@ -18,6 +18,7 @@ public class Throw {
 
 	public void setPoints(int points) {
 		this.points = points;
+		this.tmp = points;
 	}
 
 	public Boolean getLock() {
@@ -35,8 +36,7 @@ public class Throw {
 	public void setShow(Boolean show) {
 		if (show) {
 			points = tmp;
-		} else {
-			tmp = points;
+		} else if (lock == false) {
 			points = 0;
 		}
 		this.show = show;

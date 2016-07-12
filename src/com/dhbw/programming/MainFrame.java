@@ -40,6 +40,10 @@ import com.dhbw.programming.modell.ThreeOfAKind;
 
 public class MainFrame extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4471303471656073595L;
 	private JLabel lblIWantTo_1;
 	private JSpinner botSpinner;
 	private JLabel lblComputerPlayers;
@@ -50,10 +54,12 @@ public class MainFrame extends JFrame {
 	private int botCount = 0;
 	private int playerCount;
 	private ArrayList<Player> playerList = new ArrayList<Player>();
-	private Data data = new Data(new OfAKind(1), new OfAKind(2), new OfAKind(3), new OfAKind(4), new OfAKind(5),
-			new OfAKind(6), new ThreeOfAKind(), new FourOfAKind(), new FullHouse(), new LittleStraight(),
-			new BigStraight(), new Kniffel(), new Chance());
 	private DefaultTableModel tableModel = new DefaultTableModel() {
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 8793829837377277539L;
+
 		@Override
 		public boolean isCellEditable(int row, int column) {
 			// all cells false
@@ -95,7 +101,10 @@ public class MainFrame extends JFrame {
 				// reading player names
 				for (int i = 0; i < playerCount; i++) {
 					System.out.println(tableModel.getValueAt(1, 1).toString());
-					playerList.add(new Player((tableModel.getValueAt(i, 1).toString()), 0, 0, 0, 0, data));
+					playerList.add(new Player((tableModel.getValueAt(i, 1).toString()), 0, 0, 0, 0,
+							new Data(new OfAKind(1), new OfAKind(2), new OfAKind(3), new OfAKind(4), new OfAKind(5),
+									new OfAKind(6), new ThreeOfAKind(), new FourOfAKind(), new FullHouse(),
+									new LittleStraight(), new BigStraight(), new Kniffel(), new Chance())));
 					System.out.println("Creating Player with name: " + playerList.get(i).getName());
 				}
 				// System.out.println(tableModel.getValueAt(0, 1).toString());
@@ -223,6 +232,11 @@ public class MainFrame extends JFrame {
 	}
 
 	private class SwingAction extends AbstractAction {
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 7672233924093972694L;
+
 		public SwingAction() {
 			putValue(NAME, "SwingAction");
 			putValue(SHORT_DESCRIPTION, "Some short description");

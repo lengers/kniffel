@@ -31,15 +31,24 @@ public class GameFrame extends JFrame {
 
 	private JPanel contentPane;
 	private JTable table;
+	private int wrongClick = 0;
 	private ArrayList<Player> playerList;
 	private ListIterator<Player> iterator;
 	private Player player;
+	private Data data;
 	private int playerCount;
 	private int rollCount = 0;
 	private String color[][];
 	private Dice diceModell = new Dice(color);
 	private ColoredTableCellRenderer tableCellRenderer = new ColoredTableCellRenderer();
 	// private
+	private JButton[] buttons = new JButton[5]; // = { diceOneButton,
+												// diceTwoButton,
+	// diceThreeButton, diceFourButton,
+	// diceFiveButton };
+
+	private Throw[] potentialPoints;
+
 	private ImageIcon[] icons = { new ImageIcon(Main.class.getResource("Dice1.png")),
 			new ImageIcon(Main.class.getResource("Dice2.png")), new ImageIcon(Main.class.getResource("Dice3.png")),
 			new ImageIcon(Main.class.getResource("Dice4.png")), new ImageIcon(Main.class.getResource("Dice5.png")),
@@ -70,8 +79,6 @@ public class GameFrame extends JFrame {
 				diceFourButton.isEnabled(), diceFiveButton.isEnabled());
 
 		int[] dice = diceModell.getDice();
-
-		JButton[] buttons = { diceOneButton, diceTwoButton, diceThreeButton, diceFourButton, diceFiveButton };
 
 		for (int i = 0; i < buttons.length; i++) {
 			ImageIcon icon = icons[dice[i] - 1];
@@ -115,11 +122,10 @@ public class GameFrame extends JFrame {
 		JButton diceButton = new JButton("Roll the dice");
 		diceButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
-				System.out.println(player.getData().getBigStraight().getPoints());
-
-				Data data = player.getData();
-				Throw[] potentialPoints = { data.getOfakindOne(), data.getOfakindTwo(), data.getOfakindThree(),
+				System.out.println("Using DATA from " + player.getName() + ", OFAKIND for 2 is "
+						+ player.getData().getOfakindTwo().getLock());
+				data = player.getData();
+				potentialPoints = new Throw[] { data.getOfakindOne(), data.getOfakindTwo(), data.getOfakindThree(),
 						data.getOfakindFour(), data.getOfakindFive(), data.getOfakindSix(), null, null, null,
 						data.getThreeofakind(), data.getFourofakind(), data.getFullHouse(), data.getLittleStraight(),
 						data.getBigStraight(), data.getKniffel(), data.getChance() };
@@ -146,23 +152,7 @@ public class GameFrame extends JFrame {
 				// true, then set grey (disabled) or if show is true, then set
 				// green (selectable)
 
-				for (int i = 0; i < potentialPoints.length; i++) {
-					if (potentialPoints[i] != null) {
-						if (potentialPoints[i].getLock()) {
-							color[iterator.nextIndex()][(i + 1)] = "grey";
-							System.out.println("Coloring [" + iterator.nextIndex() + "][" + (i + 1) + "] grey.");
-						} else if (potentialPoints[i].getShow()) {
-							System.out.println(color[iterator.nextIndex()][i]);
-							color[iterator.nextIndex()][(i + 1)] = "green";
-							System.out.println("Coloring [" + iterator.nextIndex() + "][" + (i + 1) + "] green.");
-							gameTableModel.setValueAt(potentialPoints[i].getPoints(), (i + 1), iterator.nextIndex());
-						} else {
-							color[iterator.nextIndex()][(i + 1)] = "white";
-							System.out.println("Coloring [" + iterator.nextIndex() + "][" + (i + 1) + "] white.");
-
-						}
-					}
-				}
+				repaintTable();
 			}
 		});
 		diceButton.setBounds(569, 412, 155, 58);
@@ -171,13 +161,21 @@ public class GameFrame extends JFrame {
 		JButton doneButton = new JButton("Done");
 		doneButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				// re-enable all Dice buttons
+				for (int i = 0; i < buttons.length; i++) {
+					buttons[i].setEnabled(true);
+				}
+				// Begin again
 				if (iterator.hasNext() != true) {
 					iterator = playerList.listIterator();
+					System.out.println("Resetting iterator");
 				}
-				consoleSend("It's " + iterator.next().getName() + "'s turn.");
-				rollCount = 0;
 				player = iterator.next();
 
+				consoleSend("It's " + player.getName() + "'s turn.");
+				rollCount = 0;
+				System.out.println("Using " + player);
+				doneAction();
 			}
 		});
 		doneButton.setBounds(569, 482, 155, 45);
@@ -225,20 +223,35 @@ public class GameFrame extends JFrame {
 				JTable target = (JTable) e.getSource();
 				int row = target.getSelectedRow();
 				int column = target.getSelectedColumn();
-				// do some action if appropriate column } } });
+
+				// do some action if appropriate column
+				try {
+					if (column == iterator.nextIndex()) {
+						if (potentialPoints[row - 1].getShow() == true) {
+							potentialPoints[row - 1].setLock(true);
+							System.out.println("Set lock for " + potentialPoints[row - 1].getClass());
+							// table.repaint();
+							doneAction();
+						}
+					} else {
+						throw new IllegalArgumentException("Nope.");
+					}
+				} catch (Exception e1) {
+					if (wrongClick >= 3) {
+						consoleSend("I'm beginning to think you are doing this on purpose...");
+						wrongClick = 0;
+					}
+					consoleSend("You cannot enter points there.");
+					wrongClick++;
+				}
+
 				System.out.println(row + ", " + column);
+
 			}
 		});
 
 		// Einmaliges Aufrufen der Einfaerben-Funktion
 		tableCellRenderer.dyeTable(color, table, gameTableModel, false, false, 0, 2);
-
-		// color[0][0] = "grey";
-		// color[0][5] = "green";
-		// color[0][8] = "red";
-		// color[1][1] = "grey";
-		// color[1][6] = "green";
-		// color[1][9] = "green";
 
 		// table.getColumn("Info");
 		table.setCellSelectionEnabled(true);
@@ -255,22 +268,27 @@ public class GameFrame extends JFrame {
 		diceOneButton = new JButton();
 		diceOneButton.setBounds(48, 12, 64, 64);
 		panel.add(diceOneButton);
+		buttons[0] = diceOneButton;
 
 		diceTwoButton = new JButton();
 		diceTwoButton.setBounds(48, 88, 64, 64);
 		panel.add(diceTwoButton);
+		buttons[1] = diceTwoButton;
 
 		diceThreeButton = new JButton();
 		diceThreeButton.setBounds(48, 164, 64, 64);
 		panel.add(diceThreeButton);
+		buttons[2] = diceThreeButton;
 
 		diceFourButton = new JButton();
 		diceFourButton.setBounds(48, 240, 64, 64);
 		panel.add(diceFourButton);
+		buttons[3] = diceFourButton;
 
 		diceFiveButton = new JButton();
 		diceFiveButton.setBounds(48, 310, 64, 64);
 		panel.add(diceFiveButton);
+		buttons[4] = diceFiveButton;
 
 		JButton helpButton = new JButton("Help");
 		helpButton.setBounds(569, 547, 155, 25);
@@ -338,12 +356,43 @@ public class GameFrame extends JFrame {
 		});
 	}
 
-	private void startRounds() {
-		for (int i = 0; i < 13; i++) {
-			System.out.println("Round " + i + "!");
-			for (Player name : playerList) {
-				System.out.println(name.getName());
+	private void doneAction() {
+		// display 0 in white fields for all cells that are not
+		// available with current pips
+		for (int j = 0; j < potentialPoints.length; j++) {
+			color[iterator.nextIndex()][(j + 1)] = "white";
+			System.out.println("Coloring [" + iterator.nextIndex() + "][" + (j + 1) + "] white.");
+			if (potentialPoints[j] != null) {
+				potentialPoints[j].setShow(false);
 			}
 		}
+		repaintTable();
+	}
+
+	private void repaintTable() {
+		for (int i = 0; i < potentialPoints.length; i++) {
+			if (potentialPoints[i] != null) {
+				if (potentialPoints[i].getLock()) {
+					color[iterator.nextIndex()][(i + 1)] = "grey";
+					// System.out.println("Coloring [" +
+					// iterator.nextIndex() + "][" + (i + 1) + "]
+					// grey.");
+				} else if (potentialPoints[i].getShow()) {
+					// System.out.println(color[iterator.nextIndex()][i]);
+					color[iterator.nextIndex()][(i + 1)] = "green";
+					// System.out.println("Coloring [" +
+					// iterator.nextIndex() + "][" + (i + 1) + "]
+					// green.");
+					gameTableModel.setValueAt(potentialPoints[i].getPoints(), (i + 1), iterator.nextIndex());
+				} else {
+					color[iterator.nextIndex()][(i + 1)] = "white";
+					// System.out.println("Coloring [" +
+					// iterator.nextIndex() + "][" + (i + 1) + "]
+					// white.");
+					gameTableModel.setValueAt(potentialPoints[i].getPoints(), (i + 1), iterator.nextIndex());
+				}
+			}
+		}
+		tableCellRenderer.repaint();
 	}
 }
