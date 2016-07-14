@@ -4,18 +4,29 @@ public class Player {
 	private String name;
 	private int upperpoints;
 	private int bonus;
+	private int upperpointsAll;
 	private int lowerpoints;
 	private int totalpoints;
 	private Data data;
 
-	public Player(String name, int upperpoints, int bonus, int lowerpoints, int totalpoints, Data data) {
+	public Player(String name, int upperpoints, int bonus, int upperpointsAll, int lowerpoints, int totalpoints,
+			Data data) {
 		super();
 		this.name = name;
 		this.upperpoints = upperpoints;
 		this.bonus = bonus;
+		this.upperpointsAll = upperpointsAll;
 		this.lowerpoints = lowerpoints;
 		this.totalpoints = totalpoints;
 		this.data = data;
+	}
+
+	public int getUpperpointsAll() {
+		return upperpointsAll;
+	}
+
+	public void setUpperpointsAll(int upperpointsAll) {
+		this.upperpointsAll = upperpointsAll;
 	}
 
 	public String getName() {

@@ -101,7 +101,7 @@ public class MainFrame extends JFrame {
 				// reading player names
 				for (int i = 0; i < playerCount; i++) {
 					System.out.println(tableModel.getValueAt(1, 1).toString());
-					playerList.add(new Player((tableModel.getValueAt(i, 1).toString()), 0, 0, 0, 0,
+					playerList.add(new Player((tableModel.getValueAt(i, 1).toString()), 0, 0, 0, 0, 0,
 							new Data(new OfAKind(1), new OfAKind(2), new OfAKind(3), new OfAKind(4), new OfAKind(5),
 									new OfAKind(6), new ThreeOfAKind(), new FourOfAKind(), new FullHouse(),
 									new LittleStraight(), new BigStraight(), new Kniffel(), new Chance())));

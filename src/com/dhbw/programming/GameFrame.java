@@ -180,6 +180,19 @@ public class GameFrame extends JFrame {
 				for (int i = 0; i < buttons.length; i++) {
 					buttons[i].setIcon(null);
 				}
+
+				player.setUpperpoints(data.getOfakindOne().getPoints() + data.getOfakindTwo().getPoints()
+						+ data.getOfakindThree().getPoints() + data.getOfakindFour().getPoints()
+						+ data.getOfakindFive().getPoints() + data.getOfakindSix().getPoints());
+				if (player.getUpperpoints() >= 63) {
+					player.setBonus(35);
+				}
+				player.setUpperpointsAll(player.getUpperpoints() + player.getBonus());
+				player.setLowerpoints(data.getBigStraight().getPoints() + data.getChance().getPoints()
+						+ data.getLittleStraight().getPoints() + data.getFullHouse().getPoints()
+						+ data.getKniffel().getPoints() + data.getThreeofakind().getPoints()
+						+ data.getFourofakind().getPoints());
+				player.setTotalpoints(player.getUpperpointsAll() + player.getLowerpoints());
 			}
 		});
 		doneButton.setBounds(569, 482, 155, 45);
