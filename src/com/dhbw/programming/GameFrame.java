@@ -161,6 +161,27 @@ public class GameFrame extends JFrame {
 		JButton doneButton = new JButton("Done");
 		doneButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+
+				// add up all points and display them
+				player.setUpperpoints(data.getOfakindOne().getPoints() + data.getOfakindTwo().getPoints()
+						+ data.getOfakindThree().getPoints() + data.getOfakindFour().getPoints()
+						+ data.getOfakindFive().getPoints() + data.getOfakindSix().getPoints());
+				if (player.getUpperpoints() >= 63) {
+					player.setBonus(35);
+				}
+				player.setUpperpointsAll(player.getUpperpoints() + player.getBonus());
+				player.setLowerpoints(data.getBigStraight().getPoints() + data.getChance().getPoints()
+						+ data.getLittleStraight().getPoints() + data.getFullHouse().getPoints()
+						+ data.getKniffel().getPoints() + data.getThreeofakind().getPoints()
+						+ data.getFourofakind().getPoints());
+				player.setTotalpoints(player.getUpperpointsAll() + player.getLowerpoints());
+				gameTableModel.setValueAt(player.getUpperpoints(), 7, iterator.nextIndex());
+				gameTableModel.setValueAt(player.getBonus(), 8, iterator.nextIndex());
+				gameTableModel.setValueAt(player.getUpperpointsAll(), 9, iterator.nextIndex());
+				gameTableModel.setValueAt(player.getLowerpoints(), 17, iterator.nextIndex());
+				gameTableModel.setValueAt(player.getUpperpointsAll(), 18, iterator.nextIndex());
+				gameTableModel.setValueAt(player.getTotalpoints(), 19, iterator.nextIndex());
+
 				// re-enable all Dice buttons
 				for (int i = 0; i < buttons.length; i++) {
 					buttons[i].setEnabled(true);
@@ -181,18 +202,6 @@ public class GameFrame extends JFrame {
 					buttons[i].setIcon(null);
 				}
 
-				player.setUpperpoints(data.getOfakindOne().getPoints() + data.getOfakindTwo().getPoints()
-						+ data.getOfakindThree().getPoints() + data.getOfakindFour().getPoints()
-						+ data.getOfakindFive().getPoints() + data.getOfakindSix().getPoints());
-				if (player.getUpperpoints() >= 63) {
-					player.setBonus(35);
-				}
-				player.setUpperpointsAll(player.getUpperpoints() + player.getBonus());
-				player.setLowerpoints(data.getBigStraight().getPoints() + data.getChance().getPoints()
-						+ data.getLittleStraight().getPoints() + data.getFullHouse().getPoints()
-						+ data.getKniffel().getPoints() + data.getThreeofakind().getPoints()
-						+ data.getFourofakind().getPoints());
-				player.setTotalpoints(player.getUpperpointsAll() + player.getLowerpoints());
 			}
 		});
 		doneButton.setBounds(569, 482, 155, 45);
