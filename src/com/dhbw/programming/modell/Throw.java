@@ -34,11 +34,14 @@ public class Throw {
 	}
 
 	public void setShow(Boolean show) {
-		if (show) {
-			points = tmp;
-		} else if (lock == false) {
+		if (!show && !lock) {
 			points = 0;
 		}
+		// } else if (lock == false) {
+		// points = 0;
+		// } else {
+		// points = -1;
+		// }
 		this.show = show;
 	}
 

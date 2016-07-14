@@ -175,7 +175,11 @@ public class GameFrame extends JFrame {
 				consoleSend("It's " + player.getName() + "'s turn.");
 				rollCount = 0;
 				System.out.println("Using " + player);
+				repaintTable();
 				doneAction();
+				for (int i = 0; i < buttons.length; i++) {
+					buttons[i].setIcon(null);
+				}
 			}
 		});
 		doneButton.setBounds(569, 482, 155, 45);
@@ -389,6 +393,7 @@ public class GameFrame extends JFrame {
 					// System.out.println("Coloring [" +
 					// iterator.nextIndex() + "][" + (i + 1) + "]
 					// white.");
+
 					gameTableModel.setValueAt(potentialPoints[i].getPoints(), (i + 1), iterator.nextIndex());
 				}
 			}

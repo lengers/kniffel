@@ -85,6 +85,13 @@ public class Dice {
 		OfAKind[] kinds = { data.getOfakindOne(), data.getOfakindTwo(), data.getOfakindThree(), data.getOfakindFour(),
 				data.getOfakindFive(), data.getOfakindSix() };
 
+		/*
+		 * For every option: Check if the lock is present, if it is, set it to
+		 * show, which will be ignored by the coloring system, as it is blocked.
+		 * If the lock is not set, change the points, which will then be
+		 * displayed by the coloring function.
+		 */
+
 		for (int i = 0; i < numbers.length; i++) {
 			// Chance always possible
 			if (data.getChance().getLock() == false) {
@@ -99,26 +106,31 @@ public class Dice {
 						data.getThreeofakind().setShow(true);
 						// System.out.println("ThreeOfAKind show -> true");
 					} else {
-						data.getThreeofakind().setShow(false);
+						data.getThreeofakind().setShow(true);
 						// System.out.println("ThreeOfAKind show -> false");
 					}
 					if (numbers[i] == 3) {
 						if (kinds[i].getLock() == false) {
 							kinds[i].setPoints((i + 1) * 3);
+							System.out.println("Value: " + kinds[i].getPoints());
 							kinds[i].setShow(true);
 							// System.out.println("kinds[" + i + "] show ->
 							// true");
-						} else {
-							for (int j = 0; j < numbers.length; j++) {
-								if (j != i && j == 2 && data.getFullHouse().getLock() == false) {
-									data.getFullHouse().setShow(true);
-									// System.out.println("FullHouse show ->
-									// true");
-								}
+						}
+						kinds[i].setShow(true);
+						System.out.println("Value: " + kinds[i].getPoints());
+						for (int j = 0; j < numbers.length; j++) {
+							if (j != i && j == 2 && data.getFullHouse().getLock() == false) {
+								data.getFullHouse().setShow(true);
+								// System.out.println("FullHouse show ->
+								// true");
+							} else {
+								data.getFullHouse().setShow(true);
 							}
+
 						}
 					} else {
-						data.getFullHouse().setShow(false);
+						data.getFullHouse().setShow(true);
 						// System.out.println("FullHouse show -> false");
 					}
 				} else if (numbers[i] == 4) {
@@ -127,7 +139,7 @@ public class Dice {
 						data.getFourofakind().setShow(true);
 						// System.out.println("FourOfAKind show -> true");
 					} else {
-						data.getFourofakind().setShow(false);
+						data.getFourofakind().setShow(true);
 						// System.out.println("FourOfAKind show -> false");
 					}
 					if (kinds[i].getLock() == false) {
@@ -135,6 +147,8 @@ public class Dice {
 						kinds[i].setShow(true);
 						// System.out.println("kinds[" + i + "] show -> true");
 
+					} else {
+						kinds[i].setShow(true);
 					}
 
 				} else if (numbers[i] == 5) {
@@ -142,16 +156,17 @@ public class Dice {
 						data.getKniffel().setShow(true);
 						// System.out.println("Kniffel show -> true");
 					} else {
-						data.getKniffel().setShow(false);
+						data.getKniffel().setShow(true);
 						// System.out.println("Kniffel show -> false");
 
 					}
 					if (kinds[i].getLock() == false && data.getKniffel().getAdditionalKniffel() == true) {
 						// Additional kniffel
 						data.getKniffel().setAdditionalKniffel(true);
-						kinds[i].setPoints(50);
 						kinds[i].setShow(true);
 						// System.out.println("kinds[" + i + "] show -> true");
+					} else {
+						data.getKniffel().setShow(true);
 					}
 
 				} else {
@@ -161,6 +176,13 @@ public class Dice {
 					// System.out.println("kinds[" + i + "] show -> true");
 				}
 			} else {
+				// enable all options that are still set to zero points to allow
+				// for elimination
+				data.getKniffel().setShow(true);
+				data.getThreeofakind().setShow(true);
+				data.getFourofakind().setShow(true);
+				data.getFullHouse().setShow(true);
+
 				// only Straight and single kindOf remains
 				if (numbers[i] == 1) {
 					kinds[i].setPoints(i + 1);
@@ -168,8 +190,7 @@ public class Dice {
 					System.out.println("ONLY ONE OF " + i);
 					// System.out.println("kinds[" + i + "] show -> true");
 				} else {
-					kinds[i].setPoints(0);
-					kinds[i].setShow(false);
+					kinds[i].setShow(true);
 					// System.out.println("kinds[" + i + "] show -> false");
 
 				}
@@ -189,7 +210,7 @@ public class Dice {
 						data.getLittleStraight().setShow(true);
 						// System.out.println("LittleStraight show -> true");
 					} else {
-						data.getLittleStraight().setShow(false);
+						data.getLittleStraight().setShow(true);
 						// System.out.println("LittleStraight show -> false");
 
 					}
@@ -199,12 +220,15 @@ public class Dice {
 						data.getLittleStraight().setShow(true);
 						// System.out.println("LittleStraight show -> true");
 					} else {
-						data.getBigStraight().setShow(false);
+						data.getBigStraight().setShow(true);
 						// System.out.println("BigStraight show -> false");
 
 					}
 					n = 0;
 				}
+				// color everything else that has the value zero, but can be
+				// crossed out
+
 			}
 
 		}
