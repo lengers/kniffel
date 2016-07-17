@@ -53,21 +53,31 @@ public class Dice {
 
 	public void rollDice(Player player, Boolean diceOneButton, Boolean diceTwoButton, Boolean diceThreeButton,
 			Boolean diceFourButton, Boolean diceFiveButton) {
-		if (diceOneButton == true) {
-			dice[0] = (int) ((Math.random() * 6) + 1);
-		}
-		if (diceTwoButton == true) {
-			dice[1] = (int) ((Math.random() * 6) + 1);
-		}
-		if (diceThreeButton == true) {
-			dice[2] = (int) ((Math.random() * 6) + 1);
-		}
-		if (diceFourButton == true) {
-			dice[3] = (int) ((Math.random() * 6) + 1);
-		}
-		if (diceFiveButton == true) {
-			dice[4] = (int) ((Math.random() * 6) + 1);
-		}
+		// if (diceOneButton == true) {
+		// dice[0] = (int) ((Math.random() * 6) + 1);
+		// }
+		// if (diceTwoButton == true) {
+		// dice[1] = (int) ((Math.random() * 6) + 1);
+		// }
+		// if (diceThreeButton == true) {
+		// dice[2] = (int) ((Math.random() * 6) + 1);
+		// }
+		// if (diceFourButton == true) {
+		// dice[3] = (int) ((Math.random() * 6) + 1);
+		// }
+		// if (diceFiveButton == true) {
+		// dice[4] = (int) ((Math.random() * 6) + 1);
+		// }
+
+		dice[0] = 1;
+
+		dice[1] = 1;
+
+		dice[2] = 1;
+
+		dice[3] = 1;
+
+		dice[4] = 1;
 
 		this.numbers = fillNumbersArray(dice);
 
@@ -79,8 +89,7 @@ public class Dice {
 	private void determinePoints(Player player) {
 		Data data = player.getData();
 
-		System.out.println(
-				"Rolling dice for " + player.getName() + ", OFAKIND for 2 is " + data.getOfakindOne().getLock());
+		System.out.println("Rolling dice for " + player.getName());
 
 		OfAKind[] kinds = { data.getOfakindOne(), data.getOfakindTwo(), data.getOfakindThree(), data.getOfakindFour(),
 				data.getOfakindFive(), data.getOfakindSix() };
@@ -93,37 +102,33 @@ public class Dice {
 		 */
 
 		for (int i = 0; i < numbers.length; i++) {
+			System.out.println(i + ": " + numbers[i]);
 			// Chance always possible
 			if (data.getChance().getLock() == false) {
 				data.getChance().setPoints(pips);
 				data.getChance().setShow(true);
 				// System.out.println("Chance show -> true");
 			}
+
 			if (numbers[i] >= 2) {
-				if (numbers[i] >= 3) {
+				if (numbers[i] == 3) {
 					if (data.getThreeofakind().getLock() == false) {
 						data.getThreeofakind().setPoints(pips);
 						data.getThreeofakind().setShow(true);
-						// System.out.println("ThreeOfAKind show -> true");
 					} else {
 						data.getThreeofakind().setShow(true);
-						// System.out.println("ThreeOfAKind show -> false");
 					}
 					if (numbers[i] == 3) {
 						if (kinds[i].getLock() == false) {
 							kinds[i].setPoints((i + 1) * 3);
 							System.out.println("Value: " + kinds[i].getPoints());
 							kinds[i].setShow(true);
-							// System.out.println("kinds[" + i + "] show ->
-							// true");
 						}
 						kinds[i].setShow(true);
 						System.out.println("Value: " + kinds[i].getPoints());
 						for (int j = 0; j < numbers.length; j++) {
 							if (j != i && j == 2 && data.getFullHouse().getLock() == false) {
 								data.getFullHouse().setShow(true);
-								// System.out.println("FullHouse show ->
-								// true");
 							} else {
 								data.getFullHouse().setShow(true);
 							}
@@ -131,40 +136,33 @@ public class Dice {
 						}
 					} else {
 						data.getFullHouse().setShow(true);
-						// System.out.println("FullHouse show -> false");
 					}
 				} else if (numbers[i] == 4) {
 					if (data.getFourofakind().getLock() == false) {
 						data.getFourofakind().setPoints(pips);
 						data.getFourofakind().setShow(true);
-						// System.out.println("FourOfAKind show -> true");
 					} else {
 						data.getFourofakind().setShow(true);
-						// System.out.println("FourOfAKind show -> false");
 					}
 					if (kinds[i].getLock() == false) {
 						kinds[i].setPoints((i + 1) * 4);
 						kinds[i].setShow(true);
-						// System.out.println("kinds[" + i + "] show -> true");
 
 					} else {
 						kinds[i].setShow(true);
 					}
 
-				} else if (numbers[i] == 5) {
+				} else if (numbers[i] > 4) {
 					if (data.getKniffel().getLock() == false) {
 						data.getKniffel().setShow(true);
-						// System.out.println("Kniffel show -> true");
 					} else {
 						data.getKniffel().setShow(true);
-						// System.out.println("Kniffel show -> false");
 
 					}
 					if (kinds[i].getLock() == false && data.getKniffel().getAdditionalKniffel() == true) {
 						// Additional kniffel
 						data.getKniffel().setAdditionalKniffel(true);
 						kinds[i].setShow(true);
-						// System.out.println("kinds[" + i + "] show -> true");
 					} else {
 						data.getKniffel().setShow(true);
 					}
@@ -173,7 +171,6 @@ public class Dice {
 					// only 2#
 					kinds[i].setPoints((i + 1) * 2);
 					kinds[i].setShow(true);
-					// System.out.println("kinds[" + i + "] show -> true");
 				}
 			} else {
 				// enable all options that are still set to zero points to allow
@@ -188,10 +185,8 @@ public class Dice {
 					kinds[i].setPoints(i + 1);
 					kinds[i].setShow(true);
 					System.out.println("ONLY ONE OF " + i);
-					// System.out.println("kinds[" + i + "] show -> true");
 				} else {
 					kinds[i].setShow(true);
-					// System.out.println("kinds[" + i + "] show -> false");
 
 				}
 
@@ -208,20 +203,15 @@ public class Dice {
 					}
 					if (n == 4 && data.getLittleStraight().getLock() == false) {
 						data.getLittleStraight().setShow(true);
-						// System.out.println("LittleStraight show -> true");
 					} else {
 						data.getLittleStraight().setShow(true);
-						// System.out.println("LittleStraight show -> false");
 
 					}
 					if (n >= 5 && data.getBigStraight().getLock() == false) {
 						data.getBigStraight().setShow(true);
-						// System.out.println("BigStraight show -> true");
 						data.getLittleStraight().setShow(true);
-						// System.out.println("LittleStraight show -> true");
 					} else {
 						data.getBigStraight().setShow(true);
-						// System.out.println("BigStraight show -> false");
 
 					}
 					n = 0;

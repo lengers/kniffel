@@ -66,6 +66,7 @@ public class MainFrame extends JFrame {
 			return column != 0;
 		}
 	};
+	private static MainFrame frame;
 
 	/**
 	 * Launch the application.
@@ -74,7 +75,7 @@ public class MainFrame extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					MainFrame frame = new MainFrame();
+					frame = new MainFrame();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -115,7 +116,8 @@ public class MainFrame extends JFrame {
 				// playerList.add(player); // new Player((String) "Player" + i,
 				// 0, 0, 0, 0, data));
 				// }
-				GameFrame.main(playerList, playerCount);
+				GameFrame.main(playerList, playerCount, frame);
+				frame.setVisible(false);
 			}
 		});
 		startButton.setBounds(255, 210, 117, 25);
