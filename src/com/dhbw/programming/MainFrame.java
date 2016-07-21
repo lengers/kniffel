@@ -94,6 +94,7 @@ public class MainFrame extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		playerList = null;
 
 		JButton startButton = new JButton("Start");
 		startButton.addActionListener(new ActionListener() {
