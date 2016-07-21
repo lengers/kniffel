@@ -94,13 +94,13 @@ public class MainFrame extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		playerList = null;
 
 		JButton startButton = new JButton("Start");
 		startButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println(playerCount);
 				// reading player names
+				playerList.clear();
 				for (int i = 0; i < playerCount; i++) {
 					System.out.println(tableModel.getValueAt(1, 1).toString());
 					playerList.add(new Player((tableModel.getValueAt(i, 1).toString()), 0, 0, 0, 0, 0,

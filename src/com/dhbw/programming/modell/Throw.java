@@ -38,17 +38,13 @@ public class Throw {
 		if (!lock) {
 			if (show == true && points < 1) {
 				points = tmp;
-				System.out.println("reusing default points for " + this.getClass().getName());
 			} else if (show) {
-				System.out.println("using default points for " + this.getClass().getName());
 				points = tmp;
 			} else {
-				System.out.println("setting points to 0 for " + this.getClass().getName());
 				points = 0;
 			}
 		} else {
 			points = tmp;
-			System.out.println("Setting points to " + points + " for " + this.getClass().getName());
 		}
 
 		this.show = show;
