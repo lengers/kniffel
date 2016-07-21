@@ -437,6 +437,9 @@ public class GameFrame extends JFrame {
 			}
 			if (iterator.previousIndex() > -1) {
 				color[iterator.previousIndex()][(i + 1)] = "white";
+			} else {
+				System.out.println(playerList.size());
+				color[playerList.size()][i + 1] = "white";
 			}
 		}
 		tableCellRenderer.repaint();

@@ -159,8 +159,12 @@ public class Dice {
 
 				} else {
 					// only 2#
-					kinds[i].setPoints((i + 1) * 2);
-					kinds[i].setShow(true);
+					if (kinds[i].getLock()) {
+						kinds[i].setPoints((i + 1) * 2);
+						kinds[i].setShow(true);
+					} else {
+						kinds[i].setShow(false);
+					}
 				}
 			} else {
 				// enable all options that are still set to zero points to allow
@@ -179,32 +183,45 @@ public class Dice {
 
 				}
 
-				// Straight
-				int n = 0;
-				for (int z = 0; z <= 3; z++) {
-					for (int j = z; j < numbers.length; j++) {
-						if (numbers[j] >= 1 && numbers[j] < 3) {
-							n += 1;
-						}
-						if (numbers[j] == 0) {
-							break;
-						}
-					}
-					if (n == 4 && data.getLittleStraight().getLock() == false) {
-						data.getLittleStraight().setShow(true);
-					} else {
-						data.getLittleStraight().setShow(false);
-
-					}
-					if (n >= 5 && data.getBigStraight().getLock() == false) {
-						data.getBigStraight().setShow(true);
-						data.getLittleStraight().setShow(true);
-					} else {
-						data.getBigStraight().setShow(false);
-
-					}
+				if (i < 4 && numbers[i] >= 1 && numbers[i + 1] >= 1 && numbers[i + 2] >= 1 && numbers[i + 3] >= 1) {
+					data.getLittleStraight().setShow(true);
+				} else {
+					data.getLittleStraight().setShow(false);
 				}
-				n = 0;
+
+				if (i < 3 && numbers[i] >= 1 && numbers[i + 1] >= 1 && numbers[i + 2] >= 1 && numbers[i + 3] >= 1
+						&& numbers[i] >= 1) {
+					data.getBigStraight().setShow(true);
+				} else {
+					data.getBigStraight().setShow(false);
+				}
+
+				// Straight
+				// int n = 0;
+				// for (int z = 0; z <= 3; z++) {
+				// for (int j = z; j < numbers.length; j++) {
+				// if (numbers[j] >= 1 && numbers[j] < 3) {
+				// n += 1;
+				// }
+				// if (numbers[j] == 0) {
+				// break;
+				// }
+				// }
+				// if (n == 4 && data.getLittleStraight().getLock() == false) {
+				// data.getLittleStraight().setShow(true);
+				// } else {
+				// data.getLittleStraight().setShow(false);
+				//
+				// }
+				// if (n >= 5 && data.getBigStraight().getLock() == false) {
+				// data.getBigStraight().setShow(true);
+				// data.getLittleStraight().setShow(true);
+				// } else {
+				// data.getBigStraight().setShow(false);
+				//
+				// }
+				// }
+				// n = 0;
 
 				// color everything else that has the value zero, but can be
 				// crossed out
