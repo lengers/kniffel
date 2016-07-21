@@ -436,9 +436,10 @@ public class GameFrame extends JFrame {
 				}
 			}
 			if (iterator.previousIndex() > -1) {
+				System.out.println("Whitening previous column");
 				color[iterator.previousIndex()][(i + 1)] = "white";
 			} else {
-				System.out.println(playerList.size());
+				System.out.println("Whitening last column");
 				color[playerList.size()][i + 1] = "white";
 			}
 		}

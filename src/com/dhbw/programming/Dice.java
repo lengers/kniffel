@@ -110,14 +110,13 @@ public class Dice {
 					Threeofakind(data);
 
 					if (numbers[i] == 3) {
-						if (kinds[i].getShow() == false) {
-							if (kinds[i].getLock() == false) {
-								kinds[i].setPoints((i + 1) * 3);
-								kinds[i].setShow(true);
-							} else {
-								kinds[i].setShow(false);
-							}
+						if (kinds[i].getLock() == false) {
+							kinds[i].setPoints((i + 1) * 3);
+							kinds[i].setShow(true);
+						} else {
+							kinds[i].setShow(false);
 						}
+
 						for (int j = 0; j < numbers.length; j++) {
 							if (data.getFullHouse().getShow() == false) {
 								if (j != i && j == 2 && data.getFullHouse().getLock() == false
@@ -135,14 +134,12 @@ public class Dice {
 				} else if (numbers[i] == 4) {
 					Fourofakind(data);
 					Threeofakind(data);
-					if (kinds[i].getShow() == false) {
-						if (kinds[i].getLock() == false) {
-							kinds[i].setPoints((i + 1) * 4);
-							kinds[i].setShow(true);
+					if (kinds[i].getLock() == false) {
+						kinds[i].setPoints((i + 1) * 4);
+						kinds[i].setShow(true);
 
-						} else {
-							kinds[i].setShow(false);
-						}
+					} else {
+						kinds[i].setShow(false);
 					}
 
 				} else if (numbers[i] > 4) {
@@ -156,13 +153,11 @@ public class Dice {
 						}
 					}
 
-					if (kinds[i].getShow() == false) {
-						if (kinds[i].getLock() == false) {
-							kinds[i].setPoints((i + 1) * 5);
-							kinds[i].setShow(true);
-						} else {
-							kinds[i].setShow(false);
-						}
+					if (kinds[i].getLock() == false) {
+						kinds[i].setPoints((i + 1) * 5);
+						kinds[i].setShow(true);
+					} else {
+						kinds[i].setShow(false);
 					}
 
 					if (kinds[i].getShow() == false) {
@@ -178,14 +173,13 @@ public class Dice {
 
 				} else {
 					// only 2#
-					if (kinds[i].getShow() == false) {
-						if (kinds[i].getLock()) {
-							kinds[i].setPoints((i + 1) * 2);
-							kinds[i].setShow(true);
-						} else {
-							kinds[i].setShow(false);
-						}
+					if (kinds[i].getLock() == false) {
+						kinds[i].setPoints((i + 1) * 2);
+						kinds[i].setShow(true);
+					} else {
+						kinds[i].setShow(false);
 					}
+
 				}
 			} else {
 				// enable all options that are still set to zero points to allow
@@ -196,15 +190,14 @@ public class Dice {
 				// data.getFullHouse().setShow(true);
 
 				// only Straight and single kindOf remains
-				if (kinds[i].getShow() == false) {
-					if (numbers[i] == 1) {
-						kinds[i].setPoints(i + 1);
-						kinds[i].setShow(true);
-					} else {
-						kinds[i].setShow(true);
+				if (numbers[i] == 1) {
+					kinds[i].setPoints(i + 1);
+					kinds[i].setShow(true);
+				} else {
+					kinds[i].setShow(true);
 
-					}
 				}
+
 				if (data.getLittleStraight().getShow() == false) {
 					if (i < 4 && numbers[i] > 0 && numbers[i + 1] > 0 && numbers[i + 2] > 0 && numbers[i + 3] > 0) {
 						System.out.println("little straight");
