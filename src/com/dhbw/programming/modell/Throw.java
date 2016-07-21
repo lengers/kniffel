@@ -9,6 +9,7 @@ public class Throw {
 	public Throw(int tmp) {
 		this.lock = false;
 		this.show = false;
+		this.points = tmp;
 		this.tmp = tmp;
 	}
 
@@ -34,14 +35,17 @@ public class Throw {
 	}
 
 	public void setShow(Boolean show) {
-		if (!show && !lock) {
-			points = 0;
+		if (!lock) {
+			if (show == true && points < 1) {
+				points = tmp;
+			} else if (!show) {
+				points = 0;
+			}
+		} else {
+			points = tmp;
+			System.out.println("Setting points to " + points + " for " + this.getClass().getName());
 		}
-		// } else if (lock == false) {
-		// points = 0;
-		// } else {
-		// points = -1;
-		// }
+
 		this.show = show;
 	}
 

@@ -53,31 +53,21 @@ public class Dice {
 
 	public void rollDice(Player player, Boolean diceOneButton, Boolean diceTwoButton, Boolean diceThreeButton,
 			Boolean diceFourButton, Boolean diceFiveButton) {
-		// if (diceOneButton == true) {
-		// dice[0] = (int) ((Math.random() * 6) + 1);
-		// }
-		// if (diceTwoButton == true) {
-		// dice[1] = (int) ((Math.random() * 6) + 1);
-		// }
-		// if (diceThreeButton == true) {
-		// dice[2] = (int) ((Math.random() * 6) + 1);
-		// }
-		// if (diceFourButton == true) {
-		// dice[3] = (int) ((Math.random() * 6) + 1);
-		// }
-		// if (diceFiveButton == true) {
-		// dice[4] = (int) ((Math.random() * 6) + 1);
-		// }
-
-		dice[0] = 1;
-
-		dice[1] = 1;
-
-		dice[2] = 1;
-
-		dice[3] = 1;
-
-		dice[4] = 1;
+		if (diceOneButton == true) {
+			dice[0] = (int) ((Math.random() * 6) + 1);
+		}
+		if (diceTwoButton == true) {
+			dice[1] = (int) ((Math.random() * 6) + 1);
+		}
+		if (diceThreeButton == true) {
+			dice[2] = (int) ((Math.random() * 6) + 1);
+		}
+		if (diceFourButton == true) {
+			dice[3] = (int) ((Math.random() * 6) + 1);
+		}
+		if (diceFiveButton == true) {
+			dice[4] = (int) ((Math.random() * 6) + 1);
+		}
 
 		this.numbers = fillNumbersArray(dice);
 
@@ -112,20 +102,13 @@ public class Dice {
 
 			if (numbers[i] >= 2) {
 				if (numbers[i] == 3) {
-					if (data.getThreeofakind().getLock() == false) {
-						data.getThreeofakind().setPoints(pips);
-						data.getThreeofakind().setShow(true);
-					} else {
-						data.getThreeofakind().setShow(true);
-					}
+					Threeofakind(data);
 					if (numbers[i] == 3) {
 						if (kinds[i].getLock() == false) {
 							kinds[i].setPoints((i + 1) * 3);
-							System.out.println("Value: " + kinds[i].getPoints());
 							kinds[i].setShow(true);
 						}
 						kinds[i].setShow(true);
-						System.out.println("Value: " + kinds[i].getPoints());
 						for (int j = 0; j < numbers.length; j++) {
 							if (j != i && j == 2 && data.getFullHouse().getLock() == false) {
 								data.getFullHouse().setShow(true);
@@ -135,36 +118,43 @@ public class Dice {
 
 						}
 					} else {
-						data.getFullHouse().setShow(true);
+						data.getFullHouse().setShow(false);
 					}
 				} else if (numbers[i] == 4) {
-					if (data.getFourofakind().getLock() == false) {
-						data.getFourofakind().setPoints(pips);
-						data.getFourofakind().setShow(true);
-					} else {
-						data.getFourofakind().setShow(true);
-					}
+					Fourofakind(data);
+					Threeofakind(data);
 					if (kinds[i].getLock() == false) {
 						kinds[i].setPoints((i + 1) * 4);
 						kinds[i].setShow(true);
 
 					} else {
-						kinds[i].setShow(true);
+						kinds[i].setShow(false);
 					}
 
 				} else if (numbers[i] > 4) {
+					Fourofakind(data);
+					Threeofakind(data);
 					if (data.getKniffel().getLock() == false) {
 						data.getKniffel().setShow(true);
 					} else {
-						data.getKniffel().setShow(true);
+						data.getKniffel().setShow(false);
 
 					}
-					if (kinds[i].getLock() == false && data.getKniffel().getAdditionalKniffel() == true) {
+
+					if (kinds[i].getLock() == false) {
+						kinds[i].setPoints((i + 1) * 5);
+						kinds[i].setShow(true);
+					} else {
+						kinds[i].setShow(false);
+					}
+
+					if (kinds[i].getLock() == false && data.getKniffel().getShow() == false
+							&& data.getKniffel().getAdditionalKniffel() == false) {
 						// Additional kniffel
 						data.getKniffel().setAdditionalKniffel(true);
 						kinds[i].setShow(true);
-					} else {
-						data.getKniffel().setShow(true);
+					} else if (data.getKniffel().getShow() == false) {
+						data.getKniffel().setShow(false);
 					}
 
 				} else {
@@ -175,16 +165,15 @@ public class Dice {
 			} else {
 				// enable all options that are still set to zero points to allow
 				// for elimination
-				data.getKniffel().setShow(true);
-				data.getThreeofakind().setShow(true);
-				data.getFourofakind().setShow(true);
-				data.getFullHouse().setShow(true);
+				// data.getKniffel().setShow(true);
+				// data.getThreeofakind().setShow(true);
+				// data.getFourofakind().setShow(true);
+				// data.getFullHouse().setShow(true);
 
 				// only Straight and single kindOf remains
 				if (numbers[i] == 1) {
 					kinds[i].setPoints(i + 1);
 					kinds[i].setShow(true);
-					System.out.println("ONLY ONE OF " + i);
 				} else {
 					kinds[i].setShow(true);
 
@@ -204,18 +193,19 @@ public class Dice {
 					if (n == 4 && data.getLittleStraight().getLock() == false) {
 						data.getLittleStraight().setShow(true);
 					} else {
-						data.getLittleStraight().setShow(true);
+						data.getLittleStraight().setShow(false);
 
 					}
 					if (n >= 5 && data.getBigStraight().getLock() == false) {
 						data.getBigStraight().setShow(true);
 						data.getLittleStraight().setShow(true);
 					} else {
-						data.getBigStraight().setShow(true);
+						data.getBigStraight().setShow(false);
 
 					}
-					n = 0;
 				}
+				n = 0;
+
 				// color everything else that has the value zero, but can be
 				// crossed out
 
@@ -223,6 +213,24 @@ public class Dice {
 
 		}
 
+	}
+
+	private void Fourofakind(Data data) {
+		if (data.getFourofakind().getLock() == false) {
+			data.getFourofakind().setPoints(pips);
+			data.getFourofakind().setShow(true);
+		} else {
+			data.getFourofakind().setShow(false);
+		}
+	}
+
+	private void Threeofakind(Data data) {
+		if (data.getThreeofakind().getLock() == false) {
+			data.getThreeofakind().setPoints(pips);
+			data.getThreeofakind().setShow(true);
+		} else {
+			data.getThreeofakind().setShow(false);
+		}
 	}
 
 }

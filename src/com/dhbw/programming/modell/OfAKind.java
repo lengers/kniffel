@@ -4,7 +4,7 @@ public class OfAKind extends Throw {
 	private int number;
 
 	public OfAKind(int number) {
-		super(-1);
+		super(0);
 		this.number = number;
 	}
 

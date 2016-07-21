@@ -31,6 +31,7 @@ public class GameFrame extends JFrame {
 	public JButton diceOneButton, diceTwoButton, diceThreeButton, diceFourButton, diceFiveButton;
 	public JEditorPane textArea;
 
+	private int roundCount = 0;
 	private JPanel contentPane;
 	private JTable table;
 	private int wrongClick = 0;
@@ -192,8 +193,14 @@ public class GameFrame extends JFrame {
 				}
 				// Begin again
 				if (iterator.hasNext() != true) {
-					iterator = playerList.listIterator();
-					System.out.println("Resetting iterator");
+					if (roundCount <= 13) {
+						iterator = playerList.listIterator();
+						System.out.println("Resetting iterator");
+						roundCount++;
+					} else {
+						consoleSend("End of game.");
+						// dsiplay endcard
+					}
 				}
 				player = iterator.next();
 
@@ -263,6 +270,8 @@ public class GameFrame extends JFrame {
 							System.out.println("Set lock for " + potentialPoints[row - 1].getClass());
 							// table.repaint();
 							doneAction();
+						} else {
+							System.out.println("ja, ne.");
 						}
 					} else {
 						throw new IllegalArgumentException("Nope.");
@@ -409,7 +418,7 @@ public class GameFrame extends JFrame {
 					// System.out.println("Coloring [" +
 					// iterator.nextIndex() + "][" + (i + 1) + "]
 					// grey.");
-				} else if (potentialPoints[i].getShow()) {
+				} else if (potentialPoints[i].getShow() != null) {
 					// System.out.println(color[iterator.nextIndex()][i]);
 					color[iterator.nextIndex()][(i + 1)] = "green";
 					// System.out.println("Coloring [" +
@@ -425,6 +434,9 @@ public class GameFrame extends JFrame {
 					// gameTableModel.setValueAt(potentialPoints[i].getPoints(),
 					// (i + 1), iterator.nextIndex());
 				}
+			}
+			if (iterator.previousIndex() > -1) {
+				color[iterator.previousIndex()][(i + 1)] = "white";
 			}
 		}
 		tableCellRenderer.repaint();

@@ -4,7 +4,7 @@ public class FourOfAKind extends Throw {
 	private int number;
 
 	public FourOfAKind() {
-		super(-1);
+		super(0);
 	}
 
 	public int getNumber() {
