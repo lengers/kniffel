@@ -435,6 +435,7 @@ public class GameFrame extends JFrame {
 					// (i + 1), iterator.nextIndex());
 				}
 			}
+			System.out.println(iterator.previousIndex());
 			if (iterator.previousIndex() > -1) {
 				System.out.println("Whitening previous column");
 				color[iterator.previousIndex()][(i + 1)] = "white";
