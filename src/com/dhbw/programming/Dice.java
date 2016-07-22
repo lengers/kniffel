@@ -53,27 +53,27 @@ public class Dice {
 
 	public void rollDice(Player player, Boolean diceOneButton, Boolean diceTwoButton, Boolean diceThreeButton,
 			Boolean diceFourButton, Boolean diceFiveButton) {
-		if (diceOneButton == true) {
-			dice[0] = (int) ((Math.random() * 6) + 1);
-		}
-		if (diceTwoButton == true) {
-			dice[1] = (int) ((Math.random() * 6) + 1);
-		}
-		if (diceThreeButton == true) {
-			dice[2] = (int) ((Math.random() * 6) + 1);
-		}
-		if (diceFourButton == true) {
-			dice[3] = (int) ((Math.random() * 6) + 1);
-		}
-		if (diceFiveButton == true) {
-			dice[4] = (int) ((Math.random() * 6) + 1);
-		}
+		// if (diceOneButton == true) {
+		// dice[0] = (int) ((Math.random() * 6) + 1);
+		// }
+		// if (diceTwoButton == true) {
+		// dice[1] = (int) ((Math.random() * 6) + 1);
+		// }
+		// if (diceThreeButton == true) {
+		// dice[2] = (int) ((Math.random() * 6) + 1);
+		// }
+		// if (diceFourButton == true) {
+		// dice[3] = (int) ((Math.random() * 6) + 1);
+		// }
+		// if (diceFiveButton == true) {
+		// dice[4] = (int) ((Math.random() * 6) + 1);
+		// }
 
-		// dice[0] = 4;
-		// dice[1] = 4;
-		// dice[2] = 4;
-		// dice[3] = 3;
-		// dice[4] = 1;
+		dice[0] = 2;
+		dice[1] = 1;
+		dice[2] = 2;
+		dice[3] = 1;
+		dice[4] = 2;
 
 		this.numbers = fillNumbersArray(dice);
 
@@ -100,9 +100,11 @@ public class Dice {
 		for (int i = 0; i < numbers.length; i++) {
 			System.out.println(i + ": " + numbers[i]);
 			// Chance always possible
-			if (data.getChance().getLock() == false) {
-				data.getChance().setPoints(pips);
-				data.getChance().setShow(true);
+			if (data.getChance().getShow() == false) {
+				if (data.getChance().getLock() == false) {
+					data.getChance().setPoints(pips);
+					data.getChance().setShow(true);
+				}
 			}
 
 			if (numbers[i] >= 2) {
@@ -117,19 +119,29 @@ public class Dice {
 							kinds[i].setShow(false);
 						}
 
-						for (int j = 0; j < numbers.length; j++) {
-							if (data.getFullHouse().getShow() == false) {
+						if (data.getFullHouse().getShow() == false) { // check
+																		// first
+																		// before
+																		// starting
+																		// the
+																		// loop
+							for (int j = 0; j < numbers.length; j++) {
 								if (j != i && numbers[j] == 2 && data.getFullHouse().getLock() == false
 										&& data.getFullHouse().getShow() == false) {
-									data.getFullHouse().setShow(true);
-								} else {
-									data.getFullHouse().setShow(false);
+									if (data.getFullHouse().getShow() == false) { // check
+																					// again
+										data.getFullHouse().setShow(true);
+										System.out.println("FullHouse is true");
+										break;
+									} else {
+										data.getFullHouse().setShow(false);
+										System.out.println("FullHouse is false");
+									}
+
 								}
 							}
 
 						}
-					} else {
-						data.getFullHouse().setShow(false);
 					}
 				} else if (numbers[i] == 4) {
 					Fourofakind(data);
@@ -199,7 +211,10 @@ public class Dice {
 				}
 
 				if (data.getLittleStraight().getShow() == false) {
-					if (i < 4 && numbers[i] > 0 && numbers[i + 1] > 0 && numbers[i + 2] > 0 && numbers[i + 3] > 0) {
+					if (i < 3 && numbers[i] > 0 // 1
+							&& numbers[i + 1] > 0 // 2
+							&& numbers[i + 2] > 0 // 3
+							&& numbers[i + 3] > 0) {
 						System.out.println("little straight");
 						data.getLittleStraight().setShow(true);
 					} else {
@@ -208,7 +223,7 @@ public class Dice {
 				}
 
 				if (data.getBigStraight().getShow() == false) {
-					if (i < 3 && numbers[i] >= 1 && numbers[i + 1] >= 1 && numbers[i + 2] >= 1 && numbers[i + 3] >= 1
+					if (i < 2 && numbers[i] >= 1 && numbers[i + 1] >= 1 && numbers[i + 2] >= 1 && numbers[i + 3] >= 1
 							&& numbers[i] >= 1 && data.getBigStraight().getShow() == false) {
 						System.out.println("big straight");
 						data.getBigStraight().setShow(true);
@@ -254,22 +269,28 @@ public class Dice {
 	}
 
 	private void Fourofakind(Data data) {
-		if (data.getFourofakind().getShow() == false) {
-			if (data.getFourofakind().getLock() == false) {
+		if (data.getFourofakind().getLock() == false) {
+			if (data.getFourofakind().getShow() == false) {
 				data.getFourofakind().setPoints(pips);
 				data.getFourofakind().setShow(true);
 			} else {
 				data.getFourofakind().setShow(false);
 			}
+		} else {
+			data.getFourofakind().setShow(true);
 		}
 	}
 
 	private void Threeofakind(Data data) {
-		if (data.getThreeofakind().getLock() == false && data.getThreeofakind().getShow() == false) {
-			data.getThreeofakind().setPoints(pips);
-			data.getThreeofakind().setShow(true);
+		if (data.getThreeofakind().getLock() == false) {
+			if (data.getThreeofakind().getShow() == false) {
+				data.getThreeofakind().setPoints(pips);
+				data.getThreeofakind().setShow(true);
+			} else {
+				data.getThreeofakind().setShow(false);
+			}
 		} else {
-			data.getThreeofakind().setShow(false);
+			data.getThreeofakind().setShow(true);
 		}
 	}
 

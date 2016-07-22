@@ -40,6 +40,7 @@ public class GameFrame extends JFrame {
 	private Player player;
 	private Data data;
 	private int playerCount;
+	private Boolean cellSelected = false;
 	private int rollCount = 0;
 	private String color[][];
 	private Dice diceModell = new Dice(color);
@@ -127,6 +128,7 @@ public class GameFrame extends JFrame {
 		diceButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("Using DATA from " + player.getName());
+				System.out.println("iterator.previousIndex(): " + iterator.previousIndex());
 				data = player.getData();
 				potentialPoints = new Throw[] { data.getOfakindOne(), data.getOfakindTwo(), data.getOfakindThree(),
 						data.getOfakindFour(), data.getOfakindFive(), data.getOfakindSix(), null, null, null,
@@ -139,23 +141,16 @@ public class GameFrame extends JFrame {
 					}
 				}
 
-				if (rollCount < 3) {
-					System.out.println("Index: " + iterator.nextIndex());
-					System.out.println("Hasnext: " + iterator.hasNext());
-					System.out.println(playerList.size());
-					rollDice(player);
-					System.out.println("Index: " + iterator.nextIndex());
-					rollCount++;
-					repaintTable();
-
-				} else {
-					System.out.println("You can only roll the dice three times.");
-					consoleSend("You can only roll the dice three times.");
+				if (rollCount == 2) {
+					diceButton.setEnabled(false);
 				}
-
-				// iterate over array of potential points, check if lock is
-				// true, then set grey (disabled) or if show is true, then set
-				// green (selectable)
+				System.out.println("Index: " + iterator.nextIndex());
+				System.out.println("Hasnext: " + iterator.hasNext());
+				System.out.println(playerList.size());
+				rollDice(player);
+				System.out.println("Index: " + iterator.nextIndex());
+				rollCount++;
+				repaintTable();
 
 			}
 		});
@@ -166,53 +161,56 @@ public class GameFrame extends JFrame {
 		doneButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				repaintTable();
-
-				// add up all points and display them
-				player.setUpperpoints(data.getOfakindOne().getPoints() + data.getOfakindTwo().getPoints()
-						+ data.getOfakindThree().getPoints() + data.getOfakindFour().getPoints()
-						+ data.getOfakindFive().getPoints() + data.getOfakindSix().getPoints());
-				if (player.getUpperpoints() >= 63) {
-					player.setBonus(35);
-				}
-				player.setUpperpointsAll(player.getUpperpoints() + player.getBonus());
-				player.setLowerpoints(data.getBigStraight().getPoints() + data.getChance().getPoints()
-						+ data.getLittleStraight().getPoints() + data.getFullHouse().getPoints()
-						+ data.getKniffel().getPoints() + data.getThreeofakind().getPoints()
-						+ data.getFourofakind().getPoints());
-				player.setTotalpoints(player.getUpperpointsAll() + player.getLowerpoints());
-				gameTableModel.setValueAt(player.getUpperpoints(), 7, iterator.nextIndex());
-				gameTableModel.setValueAt(player.getBonus(), 8, iterator.nextIndex());
-				gameTableModel.setValueAt(player.getUpperpointsAll(), 9, iterator.nextIndex());
-				gameTableModel.setValueAt(player.getLowerpoints(), 17, iterator.nextIndex());
-				gameTableModel.setValueAt(player.getUpperpointsAll(), 18, iterator.nextIndex());
-				gameTableModel.setValueAt(player.getTotalpoints(), 19, iterator.nextIndex());
-
-				// re-enable all Dice buttons
-				for (int i = 0; i < buttons.length; i++) {
-					buttons[i].setEnabled(true);
-				}
-				// Begin again
-				if (iterator.hasNext() != true) {
-					if (roundCount <= 13) {
-						iterator = playerList.listIterator();
-						System.out.println("Resetting iterator");
-						roundCount++;
-					} else {
-						consoleSend("End of game.");
-						// dsiplay endcard
+				if (cellSelected == true) {
+					// add up all points and display them
+					player.setUpperpoints(data.getOfakindOne().getPoints() + data.getOfakindTwo().getPoints()
+							+ data.getOfakindThree().getPoints() + data.getOfakindFour().getPoints()
+							+ data.getOfakindFive().getPoints() + data.getOfakindSix().getPoints());
+					if (player.getUpperpoints() >= 63) {
+						player.setBonus(35);
 					}
-				}
-				player = iterator.next();
+					player.setUpperpointsAll(player.getUpperpoints() + player.getBonus());
+					player.setLowerpoints(data.getBigStraight().getPoints() + data.getChance().getPoints()
+							+ data.getLittleStraight().getPoints() + data.getFullHouse().getPoints()
+							+ data.getKniffel().getPoints() + data.getThreeofakind().getPoints()
+							+ data.getFourofakind().getPoints());
+					player.setTotalpoints(player.getUpperpointsAll() + player.getLowerpoints());
+					gameTableModel.setValueAt(player.getUpperpoints(), 7, iterator.nextIndex());
+					gameTableModel.setValueAt(player.getBonus(), 8, iterator.nextIndex());
+					gameTableModel.setValueAt(player.getUpperpointsAll(), 9, iterator.nextIndex());
+					gameTableModel.setValueAt(player.getLowerpoints(), 17, iterator.nextIndex());
+					gameTableModel.setValueAt(player.getUpperpointsAll(), 18, iterator.nextIndex());
+					gameTableModel.setValueAt(player.getTotalpoints(), 19, iterator.nextIndex());
 
-				consoleSend("It's " + player.getName() + "'s turn.");
-				rollCount = 0;
-				System.out.println("Using " + player);
-				repaintTable();
-				doneAction();
-				for (int i = 0; i < buttons.length; i++) {
-					buttons[i].setIcon(null);
+					// re-enable all Dice buttons
+					for (int i = 0; i < buttons.length; i++) {
+						buttons[i].setEnabled(true);
+					}
+					// Begin again
+					if (iterator.hasNext() != true) {
+						if (roundCount <= 13) {
+							iterator = playerList.listIterator();
+							System.out.println("Resetting iterator");
+							roundCount++;
+						} else {
+							consoleSend("[*] End of game.");
+							// dsiplay endcard
+						}
+					}
+					player = iterator.next();
+
+					consoleSend("[*] It's " + player.getName() + "'s turn.");
+					rollCount = 0;
+					System.out.println("Using " + player);
+					repaintTable();
+					doneAction();
+					for (int i = 0; i < buttons.length; i++) {
+						buttons[i].setIcon(null);
+					}
+					diceButton.setEnabled(true);
+				} else {
+					consoleSend("[!] You must select a cell to continue");
 				}
-				diceButton.setEnabled(true);
 
 			}
 		});
@@ -269,19 +267,20 @@ public class GameFrame extends JFrame {
 							potentialPoints[row - 1].setLock(true);
 							System.out.println("Set lock for " + potentialPoints[row - 1].getClass());
 							// table.repaint();
+							cellSelected = true;
 							doneAction();
 						} else {
-							System.out.println("ja, ne.");
+							System.out.println("ja, ne. SHOW ist " + potentialPoints[row - 1].getShow());
 						}
 					} else {
 						throw new IllegalArgumentException("Nope.");
 					}
 				} catch (Exception e1) {
 					if (wrongClick >= 3) {
-						consoleSend("I'm beginning to think you are doing this on purpose...");
+						consoleSend("[!] I'm beginning to think you are doing this on purpose...");
 						wrongClick = 0;
 					}
-					consoleSend("You cannot enter points there.");
+					consoleSend("[!] You cannot enter points there.");
 					wrongClick++;
 				}
 
@@ -402,7 +401,7 @@ public class GameFrame extends JFrame {
 		for (int j = 0; j < potentialPoints.length; j++) {
 			color[iterator.nextIndex()][(j + 1)] = "white";
 			System.out.println("Coloring [" + iterator.nextIndex() + "][" + (j + 1) + "] white.");
-			if (potentialPoints[j] != null) {
+			if (potentialPoints[j] != null && potentialPoints[j].getLock() == false) {
 				potentialPoints[j].setShow(false);
 			}
 		}
@@ -415,33 +414,17 @@ public class GameFrame extends JFrame {
 			if (potentialPoints[i] != null) {
 				if (potentialPoints[i].getLock()) {
 					color[iterator.nextIndex()][(i + 1)] = "grey";
-					// System.out.println("Coloring [" +
-					// iterator.nextIndex() + "][" + (i + 1) + "]
-					// grey.");
 				} else if (potentialPoints[i].getShow() != null) {
-					// System.out.println(color[iterator.nextIndex()][i]);
 					color[iterator.nextIndex()][(i + 1)] = "green";
-					// System.out.println("Coloring [" +
-					// iterator.nextIndex() + "][" + (i + 1) + "]
-					// green.");
 					gameTableModel.setValueAt(potentialPoints[i].getPoints(), (i + 1), iterator.nextIndex());
 				} else {
 					color[iterator.nextIndex()][(i + 1)] = "white";
-					// System.out.println("Coloring [" +
-					// iterator.nextIndex() + "][" + (i + 1) + "]
-					// white.");
-
-					// gameTableModel.setValueAt(potentialPoints[i].getPoints(),
-					// (i + 1), iterator.nextIndex());
 				}
 			}
-			System.out.println(iterator.previousIndex());
-			if (iterator.previousIndex() > -1) {
-				System.out.println("Whitening previous column");
-				color[iterator.previousIndex()][(i + 1)] = "white";
-			} else {
-				System.out.println("Whitening last column");
+			if (iterator.previousIndex() == 0) {
 				color[playerList.size()][i + 1] = "white";
+			} else {
+				color[iterator.previousIndex()][(i + 1)] = "white";
 			}
 		}
 		tableCellRenderer.repaint();

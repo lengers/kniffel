@@ -35,7 +35,7 @@ public class Throw {
 	}
 
 	public void setShow(Boolean show) {
-		if (!lock) {
+		if (lock == false) {
 			if (show == true && points < 1) {
 				points = tmp;
 			} else if (show) {

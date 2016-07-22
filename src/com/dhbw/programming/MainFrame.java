@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
 import javax.swing.JEditorPane;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -153,45 +152,47 @@ public class MainFrame extends JFrame {
 		lblPlayers.setBounds(319, 12, 70, 15);
 		contentPane.add(lblPlayers);
 
-		JCheckBox botCheckBox = new JCheckBox("");
-		botCheckBox.setAction(action);
-		botCheckBox.setBounds(35, 35, 28, 23);
-		contentPane.add(botCheckBox);
-		botCheckBox.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if (botCheckBox.isSelected()) {
-					System.out.println("Bots activated. Bleep bloop.");
-					lblIWantTo_1.setEnabled(true);
-					lblComputerPlayers.setEnabled(true);
-					botSpinner.setEnabled(true);
-					tableModel.addRow(new Object[] { "Bot " + (botCount), "Bot" + (botCount) });
-					playerSpinner.setEnabled(false);
-
-				} else {
-					System.out.println("Bots deactivated. Bleeeeeeep. :(");
-					lblIWantTo_1.setEnabled(false);
-					lblComputerPlayers.setEnabled(false);
-					botSpinner.setEnabled(false);
-					playerSpinner.setEnabled(true);
-				}
-			}
-		});
-
-		botSpinner = new JSpinner();
-		botSpinner.setModel(new SpinnerNumberModel(new Integer(1), null, null, new Integer(1)));
-		botSpinner.setEnabled(false);
-		botSpinner.setBounds(187, 38, 28, 20);
-		contentPane.add(botSpinner);
-
-		lblComputerPlayers = new JLabel("computer players.");
-		lblComputerPlayers.setEnabled(false);
-		lblComputerPlayers.setBounds(219, 39, 153, 15);
-		contentPane.add(lblComputerPlayers);
-
-		lblIWantTo_1 = new JLabel("I want to include");
-		lblIWantTo_1.setEnabled(false);
-		lblIWantTo_1.setBounds(64, 39, 128, 15);
-		contentPane.add(lblIWantTo_1);
+		// JCheckBox botCheckBox = new JCheckBox("");
+		// botCheckBox.setAction(action);
+		// botCheckBox.setBounds(35, 35, 28, 23);
+		// contentPane.add(botCheckBox);
+		// botCheckBox.addActionListener(new ActionListener() {
+		// public void actionPerformed(ActionEvent e) {
+		// if (botCheckBox.isSelected()) {
+		// System.out.println("Bots activated. Bleep bloop.");
+		// lblIWantTo_1.setEnabled(true);
+		// lblComputerPlayers.setEnabled(true);
+		// botSpinner.setEnabled(true);
+		// tableModel.addRow(new Object[] { "Bot " + (botCount), "Bot" +
+		// (botCount) });
+		// playerSpinner.setEnabled(false);
+		//
+		// } else {
+		// System.out.println("Bots deactivated. Bleeeeeeep. :(");
+		// lblIWantTo_1.setEnabled(false);
+		// lblComputerPlayers.setEnabled(false);
+		// botSpinner.setEnabled(false);
+		// playerSpinner.setEnabled(true);
+		// }
+		// }
+		// });
+		//
+		// botSpinner = new JSpinner();
+		// botSpinner.setModel(new SpinnerNumberModel(new Integer(1), null,
+		// null, new Integer(1)));
+		// botSpinner.setEnabled(false);
+		// botSpinner.setBounds(187, 38, 28, 20);
+		// contentPane.add(botSpinner);
+		//
+		// lblComputerPlayers = new JLabel("computer players.");
+		// lblComputerPlayers.setEnabled(false);
+		// lblComputerPlayers.setBounds(219, 39, 153, 15);
+		// contentPane.add(lblComputerPlayers);
+		//
+		// lblIWantTo_1 = new JLabel("I want to include");
+		// lblIWantTo_1.setEnabled(false);
+		// lblIWantTo_1.setBounds(64, 39, 128, 15);
+		// contentPane.add(lblIWantTo_1);
 
 		JButton aboutButton = new JButton("About");
 		aboutButton.addActionListener(new ActionListener() {
