@@ -53,27 +53,27 @@ public class Dice {
 
 	public void rollDice(Player player, Boolean diceOneButton, Boolean diceTwoButton, Boolean diceThreeButton,
 			Boolean diceFourButton, Boolean diceFiveButton) {
-		// if (diceOneButton == true) {
-		// dice[0] = (int) ((Math.random() * 6) + 1);
-		// }
-		// if (diceTwoButton == true) {
-		// dice[1] = (int) ((Math.random() * 6) + 1);
-		// }
-		// if (diceThreeButton == true) {
-		// dice[2] = (int) ((Math.random() * 6) + 1);
-		// }
-		// if (diceFourButton == true) {
-		// dice[3] = (int) ((Math.random() * 6) + 1);
-		// }
-		// if (diceFiveButton == true) {
-		// dice[4] = (int) ((Math.random() * 6) + 1);
-		// }
-
-		dice[0] = 2;
-		dice[1] = 1;
-		dice[2] = 2;
-		dice[3] = 1;
-		dice[4] = 2;
+		if (diceOneButton == true) {
+			dice[0] = (int) ((Math.random() * 6) + 1);
+		}
+		if (diceTwoButton == true) {
+			dice[1] = (int) ((Math.random() * 6) + 1);
+		}
+		if (diceThreeButton == true) {
+			dice[2] = (int) ((Math.random() * 6) + 1);
+		}
+		if (diceFourButton == true) {
+			dice[3] = (int) ((Math.random() * 6) + 1);
+		}
+		if (diceFiveButton == true) {
+			dice[4] = (int) ((Math.random() * 6) + 1);
+		}
+		// Debug dice
+		// dice[0] = 2;
+		// dice[1] = 1;
+		// dice[2] = 2;
+		// dice[3] = 1;
+		// dice[4] = 2;
 
 		this.numbers = fillNumbersArray(dice);
 
