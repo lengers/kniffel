@@ -203,12 +203,14 @@ public class Dice {
 				// data.getFullHouse().setShow(true);
 
 				// only Straight and single kindOf remains
-				if (numbers[i] == 1) {
-					kinds[i].setPoints(i + 1);
-					kinds[i].setShow(true);
-				} else {
-					kinds[i].setShow(true);
+				if (kinds[i].getLock() == false) {
+					if (numbers[i] == 1) {
+						kinds[i].setPoints(i + 1);
+						kinds[i].setShow(true);
+					} else {
+						kinds[i].setShow(false);
 
+					}
 				}
 
 				if (data.getLittleStraight().getShow() == false) {

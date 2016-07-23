@@ -47,6 +47,7 @@ public class GameFrame extends JFrame {
 	private ColoredTableCellRenderer tableCellRenderer = new ColoredTableCellRenderer();
 	private JButton[] buttons = new JButton[5];
 	private JButton diceButton;
+	private JButton doneButton;
 	private Throw[] potentialPoints;
 	private ImageIcon[] icons = { new ImageIcon(Main.class.getResource("Dice1.png")),
 			new ImageIcon(Main.class.getResource("Dice2.png")), new ImageIcon(Main.class.getResource("Dice3.png")),
@@ -118,7 +119,7 @@ public class GameFrame extends JFrame {
 				MainFrame.setVisible(true);
 			};
 		});
-		setBounds(100, 100, 753, 613);
+		setBounds(100, 100, 761, 634);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -151,13 +152,14 @@ public class GameFrame extends JFrame {
 				System.out.println("Index: " + iterator.nextIndex());
 				rollCount++;
 				repaintTable();
+				doneButton.setEnabled(true);
 
 			}
 		});
 		diceButton.setBounds(569, 412, 155, 58);
 		contentPane.add(diceButton);
 
-		JButton doneButton = new JButton("Done");
+		doneButton = new JButton("Done");
 		doneButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				repaintTable();
@@ -192,11 +194,14 @@ public class GameFrame extends JFrame {
 							iterator = playerList.listIterator();
 							System.out.println("Resetting iterator");
 							roundCount++;
+
 						} else {
 							consoleSend("[*] End of game.");
-							// dsiplay endcard
+							RankingFrame.main(playerList, playerCount, frame);
+							frame.setVisible(false);
 						}
 					}
+
 					player = iterator.next();
 
 					consoleSend("[*] It's " + player.getName() + "'s turn.");
@@ -204,6 +209,7 @@ public class GameFrame extends JFrame {
 					System.out.println("Using " + player);
 					repaintTable();
 					doneAction();
+
 					for (int i = 0; i < buttons.length; i++) {
 						buttons[i].setIcon(null);
 					}
@@ -211,7 +217,7 @@ public class GameFrame extends JFrame {
 				} else {
 					consoleSend("[!] You must select a cell to continue");
 				}
-
+				doneButton.setEnabled(false);
 			}
 		});
 		doneButton.setBounds(569, 482, 155, 45);
