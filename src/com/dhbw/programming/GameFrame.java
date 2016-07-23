@@ -236,10 +236,11 @@ public class GameFrame extends JFrame {
 		gameTableModel.addRow(new Object[] { "Info" });
 
 		// creating Table
-		String[] tableDescriptions = { "nur Einser zählen", "nur Zweier zählen", "nur Dreier zählen",
-				"nur Vierer zählen", "nur Fünfer zählen", "nur Sechser zählen", "gesamt", "Bonus bei 63 oder mehr",
-				"gesamt oberer Teil", "Dreierpasch", "Viererpasch", "Full-House", "Kleine Straße", "Große Straße",
-				"Kniffel", "Chance", "gesamt unterer Teil", "gesamt oberer Teil", "Endsumme" };
+		String[] tableDescriptions = { "nur Einser z\u00e4hlen", "nur Zweier z\u00e4hlen", "nur Dreier z\u00e4hlen",
+				"nur Vierer z\u00e4hlen", "nur F\u00fcnfer z\u00e4hlen", "nur Sechser z\u00e4hlen", "gesamt",
+				"Bonus bei 63 oder mehr", "gesamt oberer Teil", "Dreierpasch", "Viererpasch", "Full-House",
+				"Kleine Stra\u00dfe", "Gro\u00dfe Stra\u00dfe", "Kniffel", "Chance", "gesamt unterer Teil",
+				"gesamt oberer Teil", "Endsumme" };
 
 		for (int i = 0; i < tableDescriptions.length; i++) {
 			gameTableModel.addRow(new Object[] { tableDescriptions[i] });
