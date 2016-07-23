@@ -420,6 +420,7 @@ public class GameFrame extends JFrame {
 			if (potentialPoints[i] != null) {
 				if (potentialPoints[i].getLock()) {
 					color[iterator.nextIndex()][(i + 1)] = "grey";
+					gameTableModel.setValueAt(potentialPoints[i].getPoints(), (i + 1), iterator.nextIndex());
 				} else if (potentialPoints[i].getShow() != null) {
 					color[iterator.nextIndex()][(i + 1)] = "green";
 					gameTableModel.setValueAt(potentialPoints[i].getPoints(), (i + 1), iterator.nextIndex());
