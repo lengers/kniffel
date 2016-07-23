@@ -68,6 +68,7 @@ public class Dice {
 		if (diceFiveButton == true) {
 			dice[4] = (int) ((Math.random() * 6) + 1);
 		}
+
 		// Debug dice
 		// dice[0] = 2;
 		// dice[1] = 1;

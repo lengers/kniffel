@@ -11,7 +11,6 @@ public class Player {
 
 	public Player(String name, int upperpoints, int bonus, int upperpointsAll, int lowerpoints, int totalpoints,
 			Data data) {
-		super();
 		this.name = name;
 		this.upperpoints = upperpoints;
 		this.bonus = bonus;

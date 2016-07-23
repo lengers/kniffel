@@ -3,7 +3,16 @@ package com.dhbw.programming;
 import java.util.ArrayList;
 import java.util.stream.IntStream;
 
-public class Bot {
+import com.dhbw.programming.modell.Data;
+import com.dhbw.programming.modell.Player;
+
+public class Bot extends Player {
+
+	public Bot(String name, int upperpoints, int bonus, int upperpointsAll, int lowerpoints, int totalpoints,
+			Data data) {
+		super(name, upperpoints, bonus, upperpointsAll, lowerpoints, totalpoints, data);
+		// TODO Auto-generated constructor stub
+	}
 
 	private int[] botDice;
 	ArrayList<Integer> botRollAgain;
