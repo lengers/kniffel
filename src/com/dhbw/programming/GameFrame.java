@@ -272,7 +272,7 @@ public class GameFrame extends JFrame {
 				try {
 					if (rollCount > 0) {
 						if (column == iterator.nextIndex()) {
-							if (potentialPoints[row - 1].getShow() == true) {
+							if (potentialPoints[row - 1].getLock() == false) {
 								potentialPoints[row - 1].setLock(true);
 								System.out.println("Set lock for " + potentialPoints[row - 1].getClass());
 								// table.repaint();
