@@ -153,6 +153,7 @@ public class GameFrame extends JFrame {
 				rollDice(player);
 				System.out.println("Index: " + iterator.nextIndex());
 				rollCount++;
+				cellSelected = false;
 				repaintTable();
 				doneButton.setEnabled(true);
 
@@ -219,10 +220,10 @@ public class GameFrame extends JFrame {
 						buttons[i].setIcon(null);
 					}
 					diceButton.setEnabled(true);
+					doneButton.setEnabled(false);
 				} else {
 					consoleSend("[!] You must select a cell to continue");
 				}
-				doneButton.setEnabled(false);
 			}
 		});
 		doneButton.setBounds(569, 482, 155, 45);
@@ -276,22 +277,26 @@ public class GameFrame extends JFrame {
 				// that player is clicking on wrong cell
 				try {
 					if (rollCount > 0) {
-						if (column == iterator.nextIndex()) {
-							if (potentialPoints[row - 1].getLock() == false) {
-								potentialPoints[row - 1].setLock(true);
-								System.out.println("Set lock for " + potentialPoints[row - 1].getClass());
-								// table.repaint();
-								cellSelected = true;
-								doneAction();
-								// potentialPoints[row - 1].setLock(false);
+						if (cellSelected == false) {
+							if (column == iterator.nextIndex()) {
+								if (potentialPoints[row - 1].getLock() == false) {
+									potentialPoints[row - 1].setLock(true);
+									System.out.println("Set lock for " + potentialPoints[row - 1].getClass());
+									// table.repaint();
+									cellSelected = true;
+									doneAction();
+									// potentialPoints[row - 1].setLock(false);
+								} else {
+									System.out.println("ja, ne. SHOW ist " + potentialPoints[row - 1].getShow());
+								}
 							} else {
-								System.out.println("ja, ne. SHOW ist " + potentialPoints[row - 1].getShow());
+								throw new IllegalArgumentException("Nope.");
 							}
 						} else {
-							throw new IllegalArgumentException("Nope.");
+							consoleSend("[!] Please roll the dice before you select points.");
 						}
 					} else {
-						consoleSend("[!] Please roll the dice before you select points.");
+						consoleSend("[!] You can only select one cell.");
 					}
 				} catch (Exception e1) {
 					if (wrongClick >= 3) {
@@ -364,7 +369,7 @@ public class GameFrame extends JFrame {
 						+ "<b>Game Goal</b><br>"
 						+ "Clever dice and achieve the highest score on the Yahtzee table at the end!<br><br>"
 						+ "<b>Course of Play</b><br>"
-						+ "The players are in turn with rolling the dice once per round. They can dice up to three times by pressing the ‘Roll the dice’ button. The first roll is done with all five dices by clicking on the dice button. Then the player can decide with how many dices he want to dice at 2nd and 3rd attempt. The Player can select or unselect dices by clicking on them. He then rolls with those he ‘did not like’ and therefore did not click on. He can try to improve his results with the 2nd and 3rd attempt or he can forgo one or both additional dices by clicking the ‘Done’ button after the first dice. Latest after the third roll, the player must enter his dice roll in Yahtzee in the table by clicking in the table and clicking the ‘Done’ button. If the dices meet none of the conditions for the box, then zero is entered in a box which is chosen by the player.<br><br>"
+						+ "The players are in turn with rolling the dice once per round. They can dice up to three times by pressing the ï¿½Roll the diceï¿½ button. The first roll is done with all five dices by clicking on the dice button. Then the player can decide with how many dices he want to dice at 2nd and 3rd attempt. The Player can select or unselect dices by clicking on them. He then rolls with those he ï¿½did not likeï¿½ and therefore did not click on. He can try to improve his results with the 2nd and 3rd attempt or he can forgo one or both additional dices by clicking the ï¿½Doneï¿½ button after the first dice. Latest after the third roll, the player must enter his dice roll in Yahtzee in the table by clicking in the table and clicking the ï¿½Doneï¿½ button. If the dices meet none of the conditions for the box, then zero is entered in a box which is chosen by the player.<br><br>"
 						+ "<b>The Points</b><br>"
 						+ "The Yahtzee table is divided into an upper and lower section. The upper section shows the Boxes for ones, twos, threes, fours, fives and sixes. If the player decides to write his result in one of these boxes by clicking on them, the result of all dices with the same number are summed up and added to the field. The field is shown as green is it can be selected and grey if it has already been selected earlier. White fields cannot be selected by the player, because they are used by the program.<br><br>"
 						+ "<b>The Bonus</b><br>"
@@ -384,13 +389,13 @@ public class GameFrame extends JFrame {
 						+ "<b>Chance</b><br>"
 						+ "Every number does count added as score, there are no requirements.<br><br>"
 						+ "<b>2nd and 3rd Yahtzee</b><br>"
-						+ "The player has 2 opportunities if he dices a 2nd or 3rd Yahtzee: ‘Yahtzee as Joker’ or ‘Yahtzee for additional 50 points’.<br><br>"
+						+ "The player has 2 opportunities if he dices a 2nd or 3rd Yahtzee: ï¿½Yahtzee as Jokerï¿½ or ï¿½Yahtzee for additional 50 pointsï¿½.<br><br>"
 						+ "<b>Yahtzee as Joker</b><br>"
-						+ "If the player has already scored the Yahtzee field and the relating field for the numbers in the upper part, he is allowed to count his throw as any field in the lower part, e.g. he can count the 2nd Yahtzee as a Big Straight and get 40 points for it. But if he has already scored every field in the lower part, he has to ‘zero’ a field in the upper part.<br><br>"
+						+ "If the player has already scored the Yahtzee field and the relating field for the numbers in the upper part, he is allowed to count his throw as any field in the lower part, e.g. he can count the 2nd Yahtzee as a Big Straight and get 40 points for it. But if he has already scored every field in the lower part, he has to ï¿½zeroï¿½ a field in the upper part.<br><br>"
 						+ "<b>Yahtzee for 50 additional points</b><br>"
 						+ "If the player has already scored in his Yahtzee field and the relating field for the numbers is still free in the upper part, he gets 50 additional points. He gets the score for the numbers in the upper field (for example: Yahtzee with number 5 results in 25 points for upper field of number 5) and he gets 50 additional points in the Yahtzee field.<br><br>"
 						+ "<b>End of Game</b><br>"
-						+ "The game ends after the last player scored in his last field. The program now calculates the final scores and opens a ranking table showing all players. The player with the highest score is the winner. The player can start a new game by clicking on the ‘New Game’ button.<br><br>";
+						+ "The game ends after the last player scored in his last field. The program now calculates the final scores and opens a ranking table showing all players. The player with the highest score is the winner. The player can start a new game by clicking on the ï¿½New Gameï¿½ button.<br><br>";
 				JEditorPane textArea = new JEditorPane("text/html", help);
 				JScrollPane scrollPane = new JScrollPane(textArea);
 				scrollPane.setPreferredSize(new Dimension(600, 600));
