@@ -16,6 +16,6 @@ public class playerpointsComparator implements Comparator<Player> {
 			} else
 				return o1.getName().compareTo(o2.getName());
 		} else
-			return player1.compareTo(player2);
+			return player2.compareTo(player1);
 	}
 }
