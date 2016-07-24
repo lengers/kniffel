@@ -267,7 +267,8 @@ public class GameFrame extends JFrame {
 				int row = target.getSelectedRow();
 				int column = target.getSelectedColumn();
 
-				// do some action if appropriate column
+				// do some action if appropriate column, else print on console,
+				// that player is clicking on wrong cell
 				try {
 					if (column == iterator.nextIndex()) {
 						if (potentialPoints[row - 1].getShow() == true) {
@@ -276,6 +277,7 @@ public class GameFrame extends JFrame {
 							// table.repaint();
 							cellSelected = true;
 							doneAction();
+							potentialPoints[row - 1].setLock(false);
 						} else {
 							System.out.println("ja, ne. SHOW ist " + potentialPoints[row - 1].getShow());
 						}
@@ -311,31 +313,37 @@ public class GameFrame extends JFrame {
 		contentPane.add(panel);
 		panel.setLayout(null);
 
+		// creating first dice as clickable button
 		diceOneButton = new JButton();
 		diceOneButton.setBounds(48, 12, 64, 64);
 		panel.add(diceOneButton);
 		buttons[0] = diceOneButton;
 
+		// creating second dice as clickable button
 		diceTwoButton = new JButton();
 		diceTwoButton.setBounds(48, 88, 64, 64);
 		panel.add(diceTwoButton);
 		buttons[1] = diceTwoButton;
 
+		// creating third dice as clickable button
 		diceThreeButton = new JButton();
 		diceThreeButton.setBounds(48, 164, 64, 64);
 		panel.add(diceThreeButton);
 		buttons[2] = diceThreeButton;
 
+		// creating fourth dice as clickable button
 		diceFourButton = new JButton();
 		diceFourButton.setBounds(48, 240, 64, 64);
 		panel.add(diceFourButton);
 		buttons[3] = diceFourButton;
 
+		// creating fifth dice as clickable button
 		diceFiveButton = new JButton();
 		diceFiveButton.setBounds(48, 310, 64, 64);
 		panel.add(diceFiveButton);
 		buttons[4] = diceFiveButton;
 
+		// creating helpButton
 		JButton helpButton = new JButton("Help");
 		helpButton.setBounds(569, 547, 155, 25);
 		contentPane.add(helpButton);
@@ -348,6 +356,7 @@ public class GameFrame extends JFrame {
 		// textPane.setBounds(12, 13, 545, 58);
 		// contentPane.add(textPane);
 
+		// creating Console to display game informations
 		textArea = new JEditorPane("text", "Let's begin!");
 		JScrollPane scrollPane = new JScrollPane(textArea, ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER,
 				ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
@@ -355,6 +364,8 @@ public class GameFrame extends JFrame {
 		textArea.setEditable(false);
 		contentPane.add(scrollPane);
 
+		// adding Listener for first dice, so you can select or unselect
+		// the dice by clicking on it
 		diceOneButton.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent arg0) {
 				if (diceOneButton.isEnabled() == false) {
@@ -364,6 +375,8 @@ public class GameFrame extends JFrame {
 				}
 			}
 		});
+		// adding Listener for second dice, so you can select or unselect
+		// the dice by clicking on it
 		diceTwoButton.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent arg0) {
 				if (diceTwoButton.isEnabled() == false) {
@@ -373,6 +386,8 @@ public class GameFrame extends JFrame {
 				}
 			}
 		});
+		// adding Listener for third dice, so you can select or unselect
+		// the dice by clicking on it
 		diceThreeButton.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent arg0) {
 				if (diceThreeButton.isEnabled() == false) {
@@ -382,6 +397,8 @@ public class GameFrame extends JFrame {
 				}
 			}
 		});
+		// adding Listener for fourth dice, so you can select or unselect
+		// the dice by clicking on it
 		diceFourButton.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent arg0) {
 				if (diceFourButton.isEnabled() == false) {
@@ -391,6 +408,8 @@ public class GameFrame extends JFrame {
 				}
 			}
 		});
+		// adding Listener for fifth dice, so you can select or unselect
+		// the dice by clicking on it
 		diceFiveButton.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent arg0) {
 				if (diceFiveButton.isEnabled() == false) {
@@ -416,6 +435,7 @@ public class GameFrame extends JFrame {
 		diceButton.setEnabled(false);
 	}
 
+	// painting table in green and grey
 	private void repaintTable() {
 		for (int i = 0; i < potentialPoints.length; i++) {
 			if (potentialPoints[i] != null) {

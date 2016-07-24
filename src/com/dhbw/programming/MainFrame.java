@@ -72,6 +72,8 @@ public class MainFrame extends JFrame {
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
+			// starting application by opening frame, where players can be
+			// selected and named
 			public void run() {
 				try {
 					frame = new MainFrame();
@@ -87,6 +89,7 @@ public class MainFrame extends JFrame {
 	 * Create the frame.
 	 */
 	public MainFrame() {
+		// make windows closable
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 410, 297);
 		contentPane = new JPanel();
@@ -94,6 +97,7 @@ public class MainFrame extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
+		// adding start Button
 		JButton startButton = new JButton("Start");
 		startButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -116,6 +120,8 @@ public class MainFrame extends JFrame {
 				// playerList.add(player); // new Player((String) "Player" + i,
 				// 0, 0, 0, 0, data));
 				// }
+
+				// opening GameFrame with the 3 important informations
 				GameFrame.main(playerList, playerCount, frame);
 				frame.setVisible(false);
 			}
