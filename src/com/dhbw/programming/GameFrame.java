@@ -270,19 +270,23 @@ public class GameFrame extends JFrame {
 				// do some action if appropriate column, else print on console,
 				// that player is clicking on wrong cell
 				try {
-					if (column == iterator.nextIndex()) {
-						if (potentialPoints[row - 1].getShow() == true) {
-							potentialPoints[row - 1].setLock(true);
-							System.out.println("Set lock for " + potentialPoints[row - 1].getClass());
-							// table.repaint();
-							cellSelected = true;
-							doneAction();
-							// potentialPoints[row - 1].setLock(false);
+					if (rollCount > 0) {
+						if (column == iterator.nextIndex()) {
+							if (potentialPoints[row - 1].getShow() == true) {
+								potentialPoints[row - 1].setLock(true);
+								System.out.println("Set lock for " + potentialPoints[row - 1].getClass());
+								// table.repaint();
+								cellSelected = true;
+								doneAction();
+								// potentialPoints[row - 1].setLock(false);
+							} else {
+								System.out.println("ja, ne. SHOW ist " + potentialPoints[row - 1].getShow());
+							}
 						} else {
-							System.out.println("ja, ne. SHOW ist " + potentialPoints[row - 1].getShow());
+							throw new IllegalArgumentException("Nope.");
 						}
 					} else {
-						throw new IllegalArgumentException("Nope.");
+						consoleSend("[!] Please roll the dice before you select points.");
 					}
 				} catch (Exception e1) {
 					if (wrongClick >= 3) {
