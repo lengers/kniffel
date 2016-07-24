@@ -18,10 +18,10 @@ public class Main {
 	/**
 	 * @wbp.parser.entryPoint
 	 */
+	// launch
 	public static void main(String[] args) {
 
 		MainFrame.main(null);
-		// test
 
 	}
 

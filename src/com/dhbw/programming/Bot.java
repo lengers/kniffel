@@ -6,6 +6,7 @@ import java.util.stream.IntStream;
 import com.dhbw.programming.modell.Data;
 import com.dhbw.programming.modell.Player;
 
+// not implemented yet, there might be a bot support in a future version of the game
 public class Bot extends Player {
 
 	public Bot(String name, int upperpoints, int bonus, int upperpointsAll, int lowerpoints, int totalpoints,

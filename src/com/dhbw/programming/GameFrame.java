@@ -241,7 +241,7 @@ public class GameFrame extends JFrame {
 		}
 		gameTableModel.addRow(new Object[] { "Info" });
 
-		// creating Table
+		// creating Table with info text
 		String[] tableDescriptions = { "nur Einser z\u00e4hlen", "nur Zweier z\u00e4hlen", "nur Dreier z\u00e4hlen",
 				"nur Vierer z\u00e4hlen", "nur F\u00fcnfer z\u00e4hlen", "nur Sechser z\u00e4hlen", "gesamt",
 				"Bonus bei 63 oder mehr", "gesamt oberer Teil", "Dreierpasch", "Viererpasch", "Full-House",
@@ -362,6 +362,8 @@ public class GameFrame extends JFrame {
 		helpButton.setBounds(569, 547, 155, 25);
 		contentPane.add(helpButton);
 
+		// implementing funcitonality of help button by adding Listener, which
+		// then shows a html text if user clicks on button
 		helpButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String help = "<center><b>Yahtzee Manual/Rules</b></center><br><br>" + "<b>Begin of Game</b><br>"

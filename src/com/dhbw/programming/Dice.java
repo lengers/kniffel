@@ -7,9 +7,15 @@ import com.dhbw.programming.modell.Data;
 import com.dhbw.programming.modell.OfAKind;
 import com.dhbw.programming.modell.Player;
 
+// this class if for dicing, you can dive with all 5 dices or with a selected number of dices,
+// the dice happens as a random int from 1 to 6, the methods in this class also check, if the conditions for the fields are met
+
 public class Dice {
 
+	// we have 5 dices so we creat an array of 5 dices
 	private int[] dice = new int[5];
+
+	// we have 6 different number which can be rolled, numbers 1 - 6
 	private int[] numbers = new int[6];
 	private int pips;
 	private String[][] color;
@@ -18,6 +24,7 @@ public class Dice {
 		this.color = color;
 	}
 
+	// getters and setters
 	public int[] getDice() {
 		return dice;
 	}
@@ -51,6 +58,8 @@ public class Dice {
 
 	}
 
+	// the function rollDice dices for the player if he hits the button,
+	// therefore it dices every dice which is not set false (by clicking on it)
 	public void rollDice(Player player, Boolean diceOneButton, Boolean diceTwoButton, Boolean diceThreeButton,
 			Boolean diceFourButton, Boolean diceFiveButton) {
 		if (diceOneButton == true) {
@@ -83,6 +92,8 @@ public class Dice {
 		determinePoints(player);
 	}
 
+	// fakeRoll is needed if it is the next players turn, he should not have the
+	// last dices numbers
 	public void fakeRoll(Player player, Boolean diceOneButton, Boolean diceTwoButton, Boolean diceThreeButton,
 			Boolean diceFourButton, Boolean diceFiveButton) {
 
@@ -99,6 +110,7 @@ public class Dice {
 	private void determinePoints(Player player) {
 		Data data = player.getData();
 
+		// debug information
 		System.out.println("Rolling dice for " + player.getName());
 
 		OfAKind[] kinds = { data.getOfakindOne(), data.getOfakindTwo(), data.getOfakindThree(), data.getOfakindFour(),
@@ -123,6 +135,8 @@ public class Dice {
 
 			if (numbers[i] >= 2) {
 				if (numbers[i] == 3) {
+					// enabling three of a kind because dices meet conditions
+					// for the field
 					Threeofakind(data);
 
 					if (numbers[i] == 3) {
@@ -157,6 +171,8 @@ public class Dice {
 
 						}
 					}
+					// enabling four of a kind because dices meet conditions for
+					// the field
 				} else if (numbers[i] == 4) {
 					Fourofakind(data);
 					Threeofakind(data);
@@ -168,6 +184,9 @@ public class Dice {
 						kinds[i].setShow(false);
 					}
 
+					// enabling three + four of a kind and Kniffel, because
+					// dices meet conditions for all field (5 dices with same
+					// numbers)
 				} else if (numbers[i] > 4) {
 					Fourofakind(data);
 					Threeofakind(data);
@@ -220,6 +239,7 @@ public class Dice {
 					}
 				}
 
+				// dices meet conditions for little straight
 				if (data.getLittleStraight().getShow() == false) {
 					if (i < 3 && numbers[i] > 0 // 1
 							&& numbers[i + 1] > 0 // 2
@@ -232,6 +252,7 @@ public class Dice {
 					}
 				}
 
+				// dices meet conditions for big straight
 				if (data.getBigStraight().getShow() == false) {
 					if (i < 2 && numbers[i] >= 1 && numbers[i + 1] >= 1 && numbers[i + 2] >= 1 && numbers[i + 3] >= 1
 							&& numbers[i + 4] >= 1 && data.getBigStraight().getShow() == false) {

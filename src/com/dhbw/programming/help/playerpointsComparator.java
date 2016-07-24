@@ -4,6 +4,7 @@ import java.util.Comparator;
 
 import com.dhbw.programming.modell.Player;
 
+// comparator for player points, this is needed for ranking, so player with highest number is player 1 etc
 public class playerpointsComparator implements Comparator<Player> {
 
 	public int compare(Player o1, Player o2) {

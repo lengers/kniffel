@@ -126,9 +126,12 @@ public class MainFrame extends JFrame {
 				frame.setVisible(false);
 			}
 		});
+
+		// implementing start button
 		startButton.setBounds(255, 210, 117, 25);
 		contentPane.add(startButton);
 
+		// implementing a Label with following text
 		JLabel lblIWantTo = new JLabel("I want to start a new game with ");
 		lblIWantTo.setFont(new Font("Dialog", Font.BOLD, 14));
 		lblIWantTo.setBounds(12, 12, 256, 15);
@@ -153,6 +156,7 @@ public class MainFrame extends JFrame {
 		playerSpinner.setBounds(274, 7, 38, 25);
 		contentPane.add(playerSpinner);
 
+		// adding label for players
 		JLabel lblPlayers = new JLabel("players.");
 		lblPlayers.setFont(new Font("Dialog", Font.BOLD, 14));
 		lblPlayers.setBounds(319, 12, 70, 15);
@@ -200,6 +204,7 @@ public class MainFrame extends JFrame {
 		// lblIWantTo_1.setBounds(64, 39, 128, 15);
 		// contentPane.add(lblIWantTo_1);
 
+		// adding about button, which shows some tips for the game
 		JButton aboutButton = new JButton("About");
 		aboutButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -217,6 +222,8 @@ public class MainFrame extends JFrame {
 		aboutButton.setBounds(12, 210, 117, 25);
 		contentPane.add(aboutButton);
 
+		// adding a jtale for playernames, where player can edit and change
+		// names
 		nameTable = new JTable(tableModel);
 		nameTable.addFocusListener(new FocusListener() {
 			// Disable editing upon focus lost. Prohibits lost of last player
@@ -237,6 +244,8 @@ public class MainFrame extends JFrame {
 		tableModel.addColumn("Col2");
 		tableModel.addRow(new Object[] { "Player 1", "Player1" });
 		tableModel.addRow(new Object[] { "Player 2", "Player2" });
+
+		// minimum of 2 players, so default is 2 players and more can be added
 		playerCount = 2;
 		System.out.println(nameTable.getModel());
 	}

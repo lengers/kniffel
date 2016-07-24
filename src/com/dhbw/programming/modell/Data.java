@@ -36,6 +36,7 @@ public class Data {
 		this.chance = chance;
 	}
 
+	// getters and setters
 	public OfAKind getOfakindOne() {
 		return (ofakindOne);
 	}
