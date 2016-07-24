@@ -1,5 +1,6 @@
 package com.dhbw.programming;
 
+import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,6 +15,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JEditorPane;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -351,6 +353,48 @@ public class GameFrame extends JFrame {
 		JButton helpButton = new JButton("Help");
 		helpButton.setBounds(569, 547, 155, 25);
 		contentPane.add(helpButton);
+
+		helpButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String help = "<center><b>Yahtzee Manual/Rules</b></center><br><br>" + "<b>Begin of Game</b><br>"
+						+ "At the start of the game, there will pop up a small window where you can select the player numbers. Change their names by clicking in the right column of the player table and click 'Start' to begin. Then the game can start and the real game window will appear!<br><br>"
+						+ "<b>Game Goal</b><br>"
+						+ "Clever dice and achieve the highest score on the Yahtzee table at the end!<br><br>"
+						+ "<b>Course of Play</b><br>"
+						+ "The players are in turn with rolling the dice once per round. They can dice up to three times by pressing the ‘Roll the dice’ button. The first roll is done with all five dices by clicking on the dice button. Then the player can decide with how many dices he want to dice at 2nd and 3rd attempt. The Player can select or unselect dices by clicking on them. He then rolls with those he ‘did not like’ and therefore did not click on. He can try to improve his results with the 2nd and 3rd attempt or he can forgo one or both additional dices by clicking the ‘Done’ button after the first dice. Latest after the third roll, the player must enter his dice roll in Yahtzee in the table by clicking in the table and clicking the ‘Done’ button. If the dices meet none of the conditions for the box, then zero is entered in a box which is chosen by the player.<br><br>"
+						+ "<b>The Points</b><br>"
+						+ "The Yahtzee table is divided into an upper and lower section. The upper section shows the Boxes for ones, twos, threes, fours, fives and sixes. If the player decides to write his result in one of these boxes by clicking on them, the result of all dices with the same number are summed up and added to the field. The field is shown as green if the result is higher than zero and signalizes the player, that the field would be a possible good choice.<br><br>"
+						+ "<b>The Bonus</b><br>"
+						+ "To achieve the 35 bonus points, the players must have at least 63 or more points in the upper section of the table. If they achieve a higher upper score than 63, the bonus points are added automatically by the program.<br><br>"
+						+ "<b>Three of a kind:</b><br>"
+						+ "You need at least 3 dices with the same number. Every Dice does count for the score.<br><br>"
+						+ "<b>Four of a kind:</b><br>"
+						+ "You need at least 4 dices with the same number. Every Dice does count for the score.<br><br>"
+						+ "<b>Full-House:</b><br>"
+						+ "You need at least 2 dices with the same number and 3 dices with the same number. You get 25 points as score.<br><br>"
+						+ "<b>Little Straight</b><br>"
+						+ "You need at least 4 out of 5 dices showing following numbers such as 1,2,3,4 or 2,3,4,5, or 3,4,5,6. You get 30 points as score.<br><br>"
+						+ "<b>Big Straight</b><br>"
+						+ "You need all 5 dices showing following numbers such as 1,2,3,4,5 or 2,3,4,5,6. You get 40 points as score.<br><br>"
+						+ "<b>Yahtzee</b><br>"
+						+ "You need 5 dices showing the same number. You get 50 points as score.<br><br>"
+						+ "<b>Chance</b><br>"
+						+ "Every number does count added as score, there are no requirements.<br><br>"
+						+ "<b>2nd and 3rd Yahtzee</b><br>"
+						+ "The player has 2 opportunities if he dices a 2nd or 3rd Yahtzee: ‘Yahtzee as Joker’ or ‘Yahtzee for additional 50 points’.<br><br>"
+						+ "<b>Yahtzee as Joker</b><br>"
+						+ "If the player has already scored the Yahtzee field and the relating field for the numbers in the upper part, he is allowed to count his throw as any field in the lower part, e.g. he can count the 2nd Yahtzee as a Big Straight and get 40 points for it. But if he has already scored every field in the lower part, he has to ‘zero’ a field in the upper part.<br><br>"
+						+ "<b>Yahtzee for 50 additional points</b><br>"
+						+ "If the player has already scored in his Yahtzee field and the relating field for the numbers is still free in the upper part, he gets 50 additional points. He gets the score for the numbers in the upper field (for example: Yahtzee with number 5 results in 25 points for upper field of number 5) and he gets 50 additional points in the Yahtzee field.<br><br>"
+						+ "<b>End of Game</b><br>"
+						+ "The game ends after the last player scored in his last field. The program now calculates the final scores and opens a ranking table showing all players. The player with the highest score is the winner. The player can start a new game by clicking on the ‘New Game’ button.<br><br>";
+				JEditorPane textArea = new JEditorPane("text/html", help);
+				JScrollPane scrollPane = new JScrollPane(textArea);
+				scrollPane.setPreferredSize(new Dimension(600, 600));
+				JOptionPane.showMessageDialog(contentPane, scrollPane, "About", JOptionPane.PLAIN_MESSAGE);
+
+			}
+		});
 
 		// JScrollBar scrollBar = new JScrollBar();
 		// scrollBar.setBounds(540, 12, 17, 59);
