@@ -277,7 +277,7 @@ public class GameFrame extends JFrame {
 							// table.repaint();
 							cellSelected = true;
 							doneAction();
-							potentialPoints[row - 1].setLock(false);
+							// potentialPoints[row - 1].setLock(false);
 						} else {
 							System.out.println("ja, ne. SHOW ist " + potentialPoints[row - 1].getShow());
 						}
