@@ -192,14 +192,17 @@ public class GameFrame extends JFrame {
 					}
 					// Begin again
 					if (iterator.hasNext() != true) {
-						if (roundCount <= 13) {
+						if (roundCount < 12) {
 							iterator = playerList.listIterator();
 							System.out.println("Resetting iterator");
 							roundCount++;
 
+							String test = "Round count:" + roundCount;
+							consoleSend(test);
+
 						} else {
 							consoleSend("[*] End of game.");
-							RankingFrame.main(playerList, playerCount, frame);
+							RankingFrame.main(playerList, playerCount, MainFrame, frame);
 							frame.setVisible(false);
 						}
 					}

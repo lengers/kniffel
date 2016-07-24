@@ -6,11 +6,12 @@ package com.dhbw.programming;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.EventQueue;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -38,11 +39,11 @@ public class RankingFrame extends JFrame {
 	private String path;
 	private static RankingFrame frame;
 
-	public static void main(ArrayList<Player> playerList, int playerCount, JFrame MainFrame) {
+	public static void main(ArrayList<Player> playerList, int playerCount, JFrame MainFrame, JFrame GameFrame) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					RankingFrame frame = new RankingFrame(playerList, playerCount, MainFrame);
+					frame = new RankingFrame(playerList, playerCount, MainFrame, GameFrame);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -51,7 +52,7 @@ public class RankingFrame extends JFrame {
 		});
 	}
 
-	public RankingFrame(ArrayList<Player> playerList, int pCount, JFrame MainFrame) {
+	public RankingFrame(ArrayList<Player> playerList, int pCount, JFrame MainFrame, JFrame GameFrame) {
 
 		this.playerList = playerList;
 		playerCount = pCount;
@@ -91,16 +92,16 @@ public class RankingFrame extends JFrame {
 			e.printStackTrace();
 		}
 
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setPreferredSize(new Dimension(753, 643));
-
-		// addWindowListener(new WindowAdapter() {
-		// @Override
-		// public void windowClosing(WindowEvent e) {
-		// frame.setVisible(false);
-		// MainFrame.setVisible(true);
-		// };
-		// });
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				frame.dispose();
+				GameFrame.dispose();
+				MainFrame.setVisible(true);
+			};
+		});
 
 		contentPane = new JPanel() {
 			@Override
@@ -119,6 +120,7 @@ public class RankingFrame extends JFrame {
 		newGameButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.dispose();
+				GameFrame.dispose();
 				MainFrame.setVisible(true);
 			}
 		});
@@ -173,9 +175,9 @@ public class RankingFrame extends JFrame {
 		contentPane.add(platz7Label);
 
 		JLabel platz8Label = new JLabel("Platz 8");
-		platz8Label.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		platz8Label.setForeground(Color.WHITE);
 		platz8Label.setBounds(438, 442, 70, 24);
+		platz8Label.setVisible(false);
 		contentPane.add(platz8Label);
 
 		// Change visibility depending on the number of players and add
