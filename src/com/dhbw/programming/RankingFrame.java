@@ -16,6 +16,7 @@ import java.awt.event.WindowEvent;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.ListIterator;
 
 import javax.imageio.ImageIO;
@@ -25,6 +26,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import com.dhbw.programming.help.playerpointsComparator;
 import com.dhbw.programming.modell.Player;
 
 public class RankingFrame extends JFrame {
@@ -57,6 +59,8 @@ public class RankingFrame extends JFrame {
 		playerCount = pCount;
 		iterator = playerList.listIterator();
 		player = iterator.next();
+
+		Collections.sort(playerList, new playerpointsComparator());
 
 		switch (playerCount) {
 		case 2:
@@ -176,8 +180,7 @@ public class RankingFrame extends JFrame {
 		platz8Label.setBounds(438, 442, 70, 24);
 		contentPane.add(platz8Label);
 
-		// Setze die Label (auf denen die Namen der Spieler stehen) abhängig von
-		// der Anzahl der Spieler auf sichtbar
+		// Change visibility depending on the number of players
 		int i = playerCount;
 		while (i > 2) {
 			switch (i) {
