@@ -83,6 +83,19 @@ public class Dice {
 		determinePoints(player);
 	}
 
+	public void fakeRoll(Player player, Boolean diceOneButton, Boolean diceTwoButton, Boolean diceThreeButton,
+			Boolean diceFourButton, Boolean diceFiveButton) {
+
+		dice[0] = 0;
+		dice[1] = 0;
+		dice[2] = 0;
+		dice[3] = 0;
+		dice[4] = 0;
+
+		this.numbers = fillNumbersArray(dice);
+
+	}
+
 	private void determinePoints(Player player) {
 		Data data = player.getData();
 

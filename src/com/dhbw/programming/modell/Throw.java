@@ -27,6 +27,7 @@ public class Throw {
 	}
 
 	public void setLock(Boolean lock) {
+		tmp = points;
 		this.lock = lock;
 	}
 
